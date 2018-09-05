@@ -5,12 +5,24 @@ import word2vec
 client = Algorithmia.client()
 
 
+def gunzip(fname):
+    import subprocess
+    subprocess.check_output("gunzip -k {fname}".format(fname=fname), stderr=subprocess.STDOUT, shell=True)
+    
+
+
 def load_model(fname, *args, **kwargs):
+    lol = []
+    lol.append(fname)
     if fname.startswith("data:"):
-        fname = client.file(fname).getFile().name
-        return fname
-        # if fname.endswith(".gz"):
-        #     fname = client.file(fname).getFile().name
+        downladed = client.file(fname).getFile().name
+        lol.append(downladed)
+        if fname.endswith(".gz"):
+            gunzip(downloaded)
+            import os
+            lol.append(os.listdir("/tmp"))
+        
+        return lol
         
     # model = word2vec.load(fname, *args, **kwargs)
     # return model
