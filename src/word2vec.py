@@ -12,7 +12,7 @@ def load_model(fname, *args, **kwargs):
     return model
 
 
-# model = load_model("data://danielfrg/word2vec/GoogleNews-vectors-negative300.bin", encoding="ISO-8859-1", kind="bin", new_lines=False)
+# model = load_model("data://danielfrg/word2vec/GoogleNews-vectors-negative300.bin", kind="bin", encoding="ISO-8859-1", new_lines=False)
 model = load_model("data://danielfrg/word2vec/text8.bin", kind="bin")
 
 
@@ -35,7 +35,7 @@ def distance(words, metric="cosine"):
 def vectors(words):
     ret = {}
     for word in words:
-        ret[word] = model[word] if word in model else None
+        ret[word] = model[word].tolist() if word in model else None
     return ret
 
 
