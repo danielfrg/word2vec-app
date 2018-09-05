@@ -6,36 +6,39 @@ import word2vec
 client = Algorithmia.client()
 
 
-def gunzip(fname):
+def gunzip(file):
+    """
+    gunzip a file that is downloaded by Algorithmia client
+    
+    This files don't have a .gz extension e.g. "/tmp/tmpsva98zf4"
+    
+    Returns the name of the unziped file
+    gunzip extracts a file with the same name as the '___.gz' so it ends up being the same name as the original 'file' variable
+    """
     import subprocess
+    gzip = file
+    
+    # Add .gz suffix (gunzip needs it)
+    if not fname.endswith(".gz"):
+        new_gzip = file + ".gz"
+        os.rename(file, new_gzip)
+        gzip = new_gzip
+    
     try:
-        output = subprocess.check_output("gunzip -k -S _gz {fname}".format(fname=fname), stderr=subprocess.STDOUT, shell=True).decode()
-        success = True 
+        output = subprocess.check_output("gunzip -k -S _gz {gzip}".format(gzip=gzip), stderr=subprocess.STDOUT, shell=True).decode()
+        success = True
     except subprocess.CalledProcessError as e:
         output = e.output.decode()
         success = False
     
-    return output, success
+    return file, success
 
 
 def load_model(fname, *args, **kwargs):
-    lol = []
-    lol.append(fname)
     if fname.startswith("data:"):
-        downloaded = client.file(fname).getFile().name
-        lol.append(downloaded)
+        file = client.file(fname).getFile().name
         if fname.endswith(".gz"):
-            # Add .gz suffix (gunzip needs it)
-            dst = downloaded + ".gz"
-            os.rename(downloaded, dst)
-            # lol.append(dst)
-            # gunzip extracts a file with the same name of the '*.gz' so it ends up being the same name as the original 'downloaded' variable
-            output = gunzip(dst)
-            # lol.append(output)
-            
-            # lol.append(os.listdir("/tmp"))
-            
-        file = downloaded
+            file, _ = gunzip(file)
     else:
         file = fname
         
