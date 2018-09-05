@@ -9,7 +9,7 @@ client = Algorithmia.client()
 def gunzip(fname):
     import subprocess
     try:
-        output = subprocess.check_output("gunzip -k -S _gz {fname}".format(fname=fname), stderr=subprocess.STDOUT, shell=True)
+        output = subprocess.check_output("gunzip -k -S _gz {fname}".format(fname=fname), stderr=subprocess.STDOUT, shell=True).decode()
         success = True 
     except subprocess.CalledProcessError as e:
         output = e.output.decode()
@@ -28,7 +28,7 @@ def load_model(fname, *args, **kwargs):
             # Add .gz suffix (gunzip needs it)
             dst = downloaded + ".gz"
             os.rename(downloaded, dst)
-            lol.append(dst)
+            # lol.append(dst)
             output = gunzip(dst)
             lol.append(output)
             
