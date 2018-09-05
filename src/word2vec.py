@@ -7,8 +7,8 @@ client = Algorithmia.client()
 
 def gunzip(fname):
     import subprocess
-    subprocess.check_output("gunzip -k {fname}".format(fname=fname), stderr=subprocess.STDOUT, shell=True)
-    
+    output = subprocess.check_output("gunzip -k {fname}".format(fname=fname), stderr=subprocess.STDOUT, shell=True)
+    return output
 
 
 def load_model(fname, *args, **kwargs):
@@ -18,13 +18,16 @@ def load_model(fname, *args, **kwargs):
         downloaded = client.file(fname).getFile().name
         lol.append(downloaded)
         if fname.endswith(".gz"):
-            gunzip(downloaded)
+            output = gunzip(downloaded)
+            lol.append(output)
             import os
             lol.append(os.listdir("/tmp"))
             binary = "todo"
         else:
             binary = downloaded
-        return lol
+    
+    lol.append(binary)
+    return lol
         
     # model = word2vec.load(binary, *args, **kwargs)
     # return model
