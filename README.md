@@ -28,3 +28,20 @@ _Describe the output fields for your algorithm. For example:_
 
 _Provide and explain examples of input and output for your algorithm._
 
+```
+{
+    "vectors":  { "words": ["dog", "cat"]}
+}
+
+{
+    "distance": { "words": ["dog", "cat", "fish"]}
+}
+
+{
+    "similar":  { "word": "dog", "n":10} 
+}
+
+{
+    "analogy":  { "pos": ["king", "woman"], "neg": ["man"], "n":20}
+}
+```
