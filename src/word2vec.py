@@ -16,7 +16,7 @@ def load_model(fname, *args, **kwargs):
     # return model
 
 
-model = load_model("data://danielfrg/word2vec/GoogleNews-vectors-negative300.bin.gz", kind="bin", encoding="ISO-8859-1", new_lines=False)
+# model = load_model("data://danielfrg/word2vec/GoogleNews-vectors-negative300.bin.gz", kind="bin", encoding="ISO-8859-1", new_lines=False)
 model = load_model("data://danielfrg/word2vec/text8.bin.gz", kind="bin")
 # model = load_model("data://danielfrg/word2vec/text8.bin", kind="bin")
 
