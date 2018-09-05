@@ -4,6 +4,8 @@ import word2vec
 
 
 def load_model(fname, *args, **kwargs):
+    if fname.startswith('data:'):
+        fname = client.file(fname).getFile().name
     model = word2vec.load(fname, *args, **kwargs)
     return model
 
