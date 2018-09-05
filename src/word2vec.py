@@ -2,12 +2,15 @@ import Algorithmia
 import json
 import word2vec
 
+client = Algorithmia.client()
+
 
 def load_model(fname, *args, **kwargs):
     if fname.startswith('data:'):
         fname = client.file(fname).getFile().name
     model = word2vec.load(fname, *args, **kwargs)
     return model
+
 
 model = load_model("data://danielfrg/word2vec/GoogleNews-vectors-negative300.bin", encoding="ISO-8859-1", new_lines=False)
 
