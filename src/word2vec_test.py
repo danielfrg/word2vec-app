@@ -63,6 +63,6 @@ def test_multiple():
     assert isinstance(res, list)
     
     assert "vector" in res[0]
-    assert "distance" in res[0]
-    assert "similar" in res[0]
-    assert "analogy" in res[0]
+    assert "distance" in res[1]
+    assert "similar" in res[2]
+    assert "analogy" in res[3]

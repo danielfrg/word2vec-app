@@ -85,13 +85,13 @@ def apply(queries):
         "analogy":  { "pos": ["king", "woman"], "neg": ["man"], "n":10 , "metric": "cosine"}
     }
     """
-    single_query = True if  isinstance(queries, dict) else False
+    single_query = True if isinstance(queries, dict) else False
     queries = [queries] if single_query else queries
     
     responses = []
     for query in queries:
         ret = {}
-        for key, value in queries.items():
+        for key, value in query.items():
             if key in "vector":
                 ret[key] = vectors(**value)
             elif key in "distance":
