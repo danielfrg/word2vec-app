@@ -107,7 +107,7 @@ def apply(queries):
                 resp = model.generate_response(idx, metrics).tolist()
             else:
                 raise Exception("Unknown query '{key}'".format(key=key))
-        responses.append(ret)
+        responses.append(resp)
     
     if single_query:
         return responses[0]
