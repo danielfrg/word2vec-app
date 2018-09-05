@@ -13,7 +13,7 @@ def load_model(fname, *args, **kwargs):
 
 
 # model = load_model("data://danielfrg/word2vec/GoogleNews-vectors-negative300.bin", encoding="ISO-8859-1", new_lines=False)
-model = load_model("data://danielfrg/word2vec/text8.bin", new_lines=False)
+model = load_model("data://danielfrg/word2vec/text8.bin", kind="bin", new_lines=False)
 
 
 def analogy(pos, neg, n=10, metric="cosine"):
