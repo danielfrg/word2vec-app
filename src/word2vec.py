@@ -1,4 +1,5 @@
 import Algorithmia
+import json
 import word2vec
 
 
@@ -32,7 +33,12 @@ def vectors(words):
     return ret
 
 
-def apply(queries):
+def process_input(input):
+    return json.loads(input)
+
+
+
+def apply(input):
     """
     {
         "vectors":  { "words": ["dog", "cat"]},
@@ -42,7 +48,8 @@ def apply(queries):
         "analogy":  { "pos": ["king", "woman"], "neg": ["man"], "n":10 , "metric": "cosine"}
     }
     """
-        
+    
+    queries = process_input(input)
     ret = {}
     for key, value in queries.items():
         if key in "vectors":
@@ -59,6 +66,6 @@ def apply(queries):
             idx, metrics = analogy(**value)
             ret[key] = model.generate_response(idx, metrics).tolist()
         else:
-            raise Exception(f"Unknown query '{key}'")
+            raise Exception("Unknown query '{key}'".format(key=key))
     
     return ret
