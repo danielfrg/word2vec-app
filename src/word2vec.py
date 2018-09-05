@@ -6,13 +6,14 @@ client = Algorithmia.client()
 
 
 def load_model(fname, *args, **kwargs):
-    if fname.startswith('data:'):
+    if fname.startswith("data:"):
         fname = client.file(fname).getFile().name
     model = word2vec.load(fname, *args, **kwargs)
     return model
 
 
-model = load_model("data://danielfrg/word2vec/GoogleNews-vectors-negative300.bin", encoding="ISO-8859-1", new_lines=False)
+# model = load_model("data://danielfrg/word2vec/GoogleNews-vectors-negative300.bin", encoding="ISO-8859-1", new_lines=False)
+model = load_model("data://danielfrg/word2vec/text8.bin", encoding="ISO-8859-1", new_lines=False)
 
 
 def analogy(pos, neg, n=10, metric="cosine"):
@@ -40,7 +41,6 @@ def vectors(words):
 
 def process_input(input):
     return json.loads(input)
-
 
 
 def apply(input):
