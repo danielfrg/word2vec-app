@@ -71,12 +71,7 @@ def vectors(words):
     return ret
 
 
-def process_input(input):
-    return json.loads(input)
-
-
 def apply(queries):
-    return model
     """
     {
         "vectors":  { "words": ["dog", "cat"]},
@@ -86,8 +81,6 @@ def apply(queries):
         "analogy":  { "pos": ["king", "woman"], "neg": ["man"], "n":10 , "metric": "cosine"}
     }
     """
-    
-    # queries = process_input(input)
     ret = {}
     for key, value in queries.items():
         if key in "vectors":
