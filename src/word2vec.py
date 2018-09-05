@@ -19,7 +19,7 @@ def gunzip(file):
     gzip = file
     
     # Add .gz suffix (gunzip needs it)
-    if not fname.endswith(".gz"):
+    if not file.endswith(".gz"):
         new_gzip = file + ".gz"
         os.rename(file, new_gzip)
         gzip = new_gzip
