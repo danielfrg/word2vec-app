@@ -28,12 +28,13 @@ def load_model(fname, *args, **kwargs):
             # Add .gz suffix (gunzip needs it)
             dst = downloaded + ".gz"
             os.rename(downloaded, dst)
-            # lol.append(dst)
+            lol.append(dst)
             output = gunzip(dst)
             lol.append(output)
             
             lol.append(os.listdir("/tmp"))
-            binary = "todo"
+            # gzip will unzip it as the name of the '*.gz' so it ends up being the same name as the original
+            binary = downloaded
         else:
             binary = downloaded
     
