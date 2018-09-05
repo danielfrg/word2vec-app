@@ -1,6 +1,7 @@
 import Algorithmia
 import os
 import json
+import numpy as np
 import word2vec
 
 client = Algorithmia.client()
@@ -60,7 +61,7 @@ def similar(word, n=10, metric="cosine"):
 
 
 def closest(vector, n=10, metric="cosine"):
-    return model.closest(vector, n=n, metric=metric)
+    return model.closest(np.array(vector), n=n, metric=metric)
 
 
 def distance(words, metric="cosine"):
@@ -84,22 +85,24 @@ def apply(queries):
         "analogy":  { "pos": ["king", "woman"], "neg": ["man"], "n":10 , "metric": "cosine"}
     }
     """
-    ret = {}
-    for key, value in queries.items():
-        if key in "vectors":
-            ret[key] = vectors(**value)
-        elif key in "distance":
-            ret[key] = distance(**value)
-        elif key in "closest":
-            idx, metrics = closest(**value)
-            ret[key] = model.generate_response(idx, metrics).tolist()
-        elif key == "similar":
-            idx, metrics = similar(**value)
-            ret[key] = model.generate_response(idx, metrics).tolist()
-        elif key == "analogy":
-            idx, metrics = analogy(**value)
-            ret[key] = model.generate_response(idx, metrics).tolist()
-        else:
-            raise Exception("Unknown query '{key}'".format(key=key))
-    
-    return ret
+    responses = []
+    for query in queries:
+        ret = {}
+        for key, value in queries.items():
+            if key in "vector":
+                ret[key] = vectors(**value)
+            elif key in "distance":
+                ret[key] = distance(**value)
+            elif key in "closest":
+                idx, metrics = closest(**value)
+                ret[key] = model.generate_response(idx, metrics).tolist()
+            elif key == "similar":
+                idx, metrics = similar(**value)
+                ret[key] = model.generate_response(idx, metrics).tolist()
+            elif key == "analogy":
+                idx, metrics = analogy(**value)
+                ret[key] = model.generate_response(idx, metrics).tolist()
+            else:
+                raise Exception("Unknown query '{key}'".format(key=key))
+        responses.append(ret)
+    return responses
