@@ -85,6 +85,9 @@ def apply(queries):
         "analogy":  { "pos": ["king", "woman"], "neg": ["man"], "n":10 , "metric": "cosine"}
     }
     """
+    single_query = True if  isinstance(queries, dict) else False
+    queries = [queries] if single_query else queries
+    
     responses = []
     for query in queries:
         ret = {}
@@ -105,4 +108,7 @@ def apply(queries):
             else:
                 raise Exception("Unknown query '{key}'".format(key=key))
         responses.append(ret)
+    
+    if single_query:
+        return responses[0]
     return responses
