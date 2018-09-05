@@ -28,21 +28,19 @@ def load_model(fname, *args, **kwargs):
             # Add .gz suffix (gunzip needs it)
             dst = downloaded + ".gz"
             os.rename(downloaded, dst)
-            lol.append(dst)
+            # lol.append(dst)
+            # gunzip extracts a file with the same name of the '*.gz' so it ends up being the same name as the original 'downloaded' variable
             output = gunzip(dst)
-            lol.append(output)
+            # lol.append(output)
             
-            lol.append(os.listdir("/tmp"))
-            # gzip will unzip it as the name of the '*.gz' so it ends up being the same name as the original
-            binary = downloaded
-        else:
-            binary = downloaded
-    
-    lol.append(binary)
-    return lol
+            # lol.append(os.listdir("/tmp"))
+            
+        file = downloaded
+    else:
+        file = fname
         
-    # model = word2vec.load(binary, *args, **kwargs)
-    # return model
+    model = word2vec.load(file, *args, **kwargs)
+    return model
 
 
 # model = load_model("data://danielfrg/word2vec/GoogleNews-vectors-negative300.bin.gz", kind="bin", encoding="ISO-8859-1", new_lines=False)
