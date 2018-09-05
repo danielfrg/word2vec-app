@@ -90,21 +90,21 @@ def apply(queries):
     
     responses = []
     for query in queries:
-        ret = {}
+        resp = None
         for key, value in query.items():
             if key in "vector":
-                ret[key] = vectors(**value)
+                resp = vectors(**value)
             elif key in "distance":
-                ret[key] = distance(**value)
+                resp = distance(**value)
             elif key in "closest":
                 idx, metrics = closest(**value)
-                ret[key] = model.generate_response(idx, metrics).tolist()
+                resp = model.generate_response(idx, metrics).tolist()
             elif key == "similar":
                 idx, metrics = similar(**value)
-                ret[key] = model.generate_response(idx, metrics).tolist()
+                resp = model.generate_response(idx, metrics).tolist()
             elif key == "analogy":
                 idx, metrics = analogy(**value)
-                ret[key] = model.generate_response(idx, metrics).tolist()
+                resp = model.generate_response(idx, metrics).tolist()
             else:
                 raise Exception("Unknown query '{key}'".format(key=key))
         responses.append(ret)
