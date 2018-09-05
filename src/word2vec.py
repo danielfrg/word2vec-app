@@ -43,7 +43,7 @@ def process_input(input):
     return json.loads(input)
 
 
-def apply(input):
+def apply(queries):
     """
     {
         "vectors":  { "words": ["dog", "cat"]},
@@ -54,7 +54,7 @@ def apply(input):
     }
     """
     
-    queries = process_input(input)
+    # queries = process_input(input)
     ret = {}
     for key, value in queries.items():
         if key in "vectors":
