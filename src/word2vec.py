@@ -7,8 +7,14 @@ client = Algorithmia.client()
 
 def gunzip(fname):
     import subprocess
-    output = subprocess.check_output("gunzip -k {fname}".format(fname=fname), stderr=subprocess.STDOUT, shell=True)
-    return output
+    try:
+        output = subprocess.check_output("gunzip -k {fname}".format(fname=fname), stderr=subprocess.STDOUT, shell=True)
+        success = True 
+    except CalledProcessError as e:
+        output = e.output.decode()
+        success = False
+    
+    return output, success
 
 
 def load_model(fname, *args, **kwargs):
