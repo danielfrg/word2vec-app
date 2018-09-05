@@ -15,16 +15,18 @@ def load_model(fname, *args, **kwargs):
     lol = []
     lol.append(fname)
     if fname.startswith("data:"):
-        downladed = client.file(fname).getFile().name
-        lol.append(downladed)
+        downloaded = client.file(fname).getFile().name
+        lol.append(downloaded)
         if fname.endswith(".gz"):
             gunzip(downloaded)
             import os
             lol.append(os.listdir("/tmp"))
-        
+            binary = "todo"
+        else:
+            binary = downloaded
         return lol
         
-    # model = word2vec.load(fname, *args, **kwargs)
+    # model = word2vec.load(binary, *args, **kwargs)
     # return model
 
 
