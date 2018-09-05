@@ -10,7 +10,7 @@ def gunzip(fname):
     try:
         output = subprocess.check_output("gunzip -k {fname}".format(fname=fname), stderr=subprocess.STDOUT, shell=True)
         success = True 
-    except CalledProcessError as e:
+    except subprocess.CalledProcessError as e:
         output = e.output.decode()
         success = False
     
