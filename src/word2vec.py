@@ -53,10 +53,15 @@ model = load_model("data://danielfrg/word2vec/GoogleNews-vectors-negative300.bin
 
 
 def analogy(pos, neg, n=10, metric="cosine"):
+    for word in pos + neg:
+        if word not in model:
+            return {"error": "not_in_vocab", "word": word}
     return model.analogy(pos=pos, neg=neg, n=n, metric=metric)
 
 
 def similar(word, n=10, metric="cosine"):
+    if word not in model:
+        return {"error": "not_in_vocab", "word": word}
     return model.similar(word, n=n, metric=metric)
 
 
