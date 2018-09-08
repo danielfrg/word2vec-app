@@ -56,17 +56,20 @@ def analogy(pos, neg, n=10, metric="cosine"):
     for word in pos + neg:
         if word not in model:
             return {"error": "not_in_vocab", "word": word}
-    return model.analogy(pos=pos, neg=neg, n=n, metric=metric)
+    idx, metrics = model.analogy(pos=pos, neg=neg, n=n, metric=metric)
+    resp = model.generate_response(idx, metrics).tolist()
 
 
 def similar(word, n=10, metric="cosine"):
     if word not in model:
         return {"error": "not_in_vocab", "word": word}
-    return model.similar(word, n=n, metric=metric)
+    idx, metrics = model.similar(word, n=n, metric=metric)
+    resp = model.generate_response(idx, metrics).tolist()
 
 
 def closest(vector, n=10, metric="cosine"):
-    return model.closest(np.array(vector), n=n, metric=metric)
+    idx, metrics model.closest(np.array(vector), n=n, metric=metric)
+    resp = model.generate_response(idx, metrics).tolist()
 
 
 def distance(words, metric="cosine"):
@@ -102,14 +105,11 @@ def apply(queries):
             elif key in "distance":
                 resp = distance(**value)
             elif key in "closest":
-                idx, metrics = closest(**value)
-                resp = model.generate_response(idx, metrics).tolist()
+                resp = closest(**value)
             elif key == "similar":
-                idx, metrics = similar(**value)
-                resp = model.generate_response(idx, metrics).tolist()
+                resp = similar(**value)
             elif key == "analogy":
-                idx, metrics = analogy(**value)
-                resp = model.generate_response(idx, metrics).tolist()
+                resp = analogy(**value)
             else:
                 raise Exception("Unknown query '{key}'".format(key=key))
         responses.append(resp)
