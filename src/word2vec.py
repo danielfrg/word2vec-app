@@ -57,19 +57,19 @@ def analogy(pos, neg, n=10, metric="cosine"):
         if word not in model:
             return {"error": "not_in_vocab", "word": word}
     idx, metrics = model.analogy(pos=pos, neg=neg, n=n, metric=metric)
-    resp = model.generate_response(idx, metrics).tolist()
+    return model.generate_response(idx, metrics).tolist()
 
 
 def similar(word, n=10, metric="cosine"):
     if word not in model:
         return {"error": "not_in_vocab", "word": word}
     idx, metrics = model.similar(word, n=n, metric=metric)
-    resp = model.generate_response(idx, metrics).tolist()
+    return model.generate_response(idx, metrics).tolist()
 
 
 def closest(vector, n=10, metric="cosine"):
-    idx, metrics model.closest(np.array(vector), n=n, metric=metric)
-    resp = model.generate_response(idx, metrics).tolist()
+    idx, metrics = model.closest(np.array(vector), n=n, metric=metric)
+    return model.generate_response(idx, metrics).tolist()
 
 
 def distance(words, metric="cosine"):
