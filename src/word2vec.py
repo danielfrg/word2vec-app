@@ -101,6 +101,8 @@ def apply(queries):
         resp = None
         for key, value in query.items():
             if key in "vector":
+                resp = "ok"
+            elif key in "vector":
                 resp = vectors(**value)
             elif key in "distance":
                 resp = distance(**value)
