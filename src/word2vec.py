@@ -100,7 +100,7 @@ def apply(queries):
     for query in queries:
         resp = None
         for key, value in query.items():
-            if key in "vector":
+            if key in "status":
                 resp = "ok"
             elif key in "vector":
                 resp = vectors(**value)
