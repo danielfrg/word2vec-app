@@ -21,6 +21,17 @@ class App extends React.Component {
                 this.setState({ apiStatus: "error", error: response.error });
             } else {
                 this.setState({ apiStatus: "loading" });
+
+                this.client.load().then((response) => {
+                    if (response.error) {
+                        this.setState({
+                            apiStatus: "error",
+                            error: response.error,
+                        });
+                    } else {
+                        this.setState({ apiStatus: "ready" });
+                    }
+                });
             }
         });
     }
@@ -43,7 +54,7 @@ class App extends React.Component {
             <React.Fragment>
                 {statusEl}
                 {errorEl}
-                <div className="row">
+                <div className="row boxes">
                     <Distance
                         client={this.client}
                         apiStatus={this.state.apiStatus}

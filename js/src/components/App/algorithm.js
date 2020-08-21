@@ -7,13 +7,18 @@ class Word2vec {
     }
 
     ping() {
-        return this.client.algo("danielfrg/word2vec/0.3.2").pipe({ ping: "" });
+        return this.client.algo("danielfrg/word2vec/0.4.0").pipe({ ping: "" });
+    }
+
+    load() {
+        return this.client.algo("danielfrg/word2vec/0.4.0").pipe({ load: "" });
     }
 
     similar(word) {
+        console.log(word);
         return this.client
-            .algo("danielfrg/word2vec/0.3.2")
-            .pipe({ predict: { distance: { word: word, n: 10 } } });
+            .algo("danielfrg/word2vec/0.4.0")
+            .pipe({ predict: { similar: { word: word, n: 10 } } });
     }
 }
 

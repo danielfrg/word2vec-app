@@ -4,7 +4,13 @@ $white: #ffffff;
 $grey: #313638;
 $btn-color: $grey;
 
+html {
+    height: 100%;
+}
+
 body {
+    height: 100%;
+    display: flex;
     color: $grey;
     background: $orange;
     font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI",
@@ -61,32 +67,8 @@ a {
     }
 }
 
-.snipper {
-    top: 15px;
-    right: 30px;
-    width: 25px;
-    height: 25px;
-    border: 6px solid $grey;
-    border-top: 6px solid $orange-light;
-    border-radius: 50%;
-    position: absolute;
-}
-
-.spin {
-    animation: spinner 1.5s linear infinite;
-}
-
-@keyframes spinner {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
-}
-
-.hide {
-    display: none;
+.boxes {
+    margin: 20px auto;
 }
 
 .box {
@@ -127,26 +109,52 @@ a {
         }
     }
 
-    .response {
-        table {
+    .snipper {
+        top: 15px;
+        right: 30px;
+        width: 25px;
+        height: 25px;
+        border: 6px solid $grey;
+        border-top: 6px solid $orange-light;
+        border-radius: 50%;
+        position: absolute;
+    }
+
+    .spin {
+        animation: spinner 1.5s linear infinite;
+    }
+
+    @keyframes spinner {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    .hide {
+        display: none;
+    }
+
+    table {
+        border: 3px solid $grey;
+        th {
+            padding: 10px;
             border: 3px solid $grey;
-            th {
-                padding: 10px;
-                border: 3px solid $grey;
-            }
+        }
 
-            td {
-                padding: 10px;
-                border: none;
-            }
+        td {
+            padding: 10px;
+            border: none;
+        }
 
-            .word {
-                width: 100%;
-            }
+        .word {
+            width: 100%;
+        }
 
-            .distance {
-                width: 75px;
-            }
+        .distance {
+            width: 75px;
         }
     }
 
@@ -191,7 +199,7 @@ a {
     }
 }
 
-.footer {
+footer {
     text-align: center;
     font-size: 0.6em;
 }

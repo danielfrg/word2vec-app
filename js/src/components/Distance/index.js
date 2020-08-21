@@ -1,12 +1,15 @@
-import React from "react";
+/* eslint-disable jsx-a11y/anchor-is-valid */
+import React, { Fragment } from "react";
 
 class Distance extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            word: "",
-            results: "",
+            waiting: false,
+            input: "",
+            result: "",
+            error: "",
         };
     }
 
@@ -17,29 +20,92 @@ class Distance extends React.Component {
     handleClick = (e) => {
         const { client } = this.props;
 
-        client.distance(this.state.input).then((response) => {
+        this.setState({ waiting: true });
+
+        client.similar(this.state.input).then((response) => {
             if (response.error) {
                 this.setState({ apiStatus: "error", error: response.error });
+            } else {
+                console.log(response);
+                this.setState({ waiting: false, result: response.result });
             }
         });
     };
 
+    ex_france = (e) => {
+        e.preventDefault();
+        this.setState({ input: "france" });
+    };
+    ex_san_francisco = (e) => {
+        e.preventDefault();
+        this.setState({ input: "san_francisco" });
+    };
+    ex_apple = (e) => {
+        e.preventDefault();
+        this.setState({ input: "apple" });
+    };
+    ex_dog = (e) => {
+        e.preventDefault();
+        this.setState({ input: "dog" });
+    };
+
     render() {
         const { apiStatus } = this.props;
+        const { waiting } = this.state;
 
-        let enabled = false;
+        let ready = false;
         if (apiStatus == "ready") {
-            enabled = true;
+            ready = true;
         }
 
-        let waiting = false;
-        // return "waiting";
+        let errorEl = "";
+        if (this.state.error) {
+            errorEl = (
+                <Fragment>
+                    <p className="error">
+                        {this.state.error.error_type}:{" "}
+                        {this.state.error.message}
+                    </p>
+                    <p className="error">{this.state.error.stacktrace}</p>
+                </Fragment>
+            );
+        }
+
+        let tableEl = "";
+        if (this.state.result) {
+            let rows = this.state.result.map((result, index) => (
+                // <li key={index}>{result}</li>
+                <tr key={index}>
+                    <td className="word">{result[0]}</td>
+                    <td className="distance">{result[1]}</td>
+                </tr>
+            ));
+
+            // <tr v-for="entry in data">
+            //     <td className="word">"{{ entry[0] }}"</td>
+            //     <td className="distance">"{{ entry[1] }}"</td>
+            // </tr>
+
+            tableEl = (
+                <div className="response">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th className="word">Word</th>
+                                <th className="distance">Distance</th>
+                            </tr>
+                        </thead>
+                        <tbody>{rows}</tbody>
+                    </table>
+                </div>
+            );
+        }
 
         return (
             <div id="similar" className="col-md-6">
                 <div className="box">
                     <div
-                        className={`snipper spin ${"" ? waiting : "hide"}`}
+                        className={`snipper spin ${waiting ? "" : "hide"}`}
                     ></div>
                     <h2>Top N similar</h2>
                     <p>Find the most similar words</p>
@@ -50,35 +116,43 @@ class Distance extends React.Component {
                                     type="text"
                                     placeholder="WORD"
                                     onChange={this.handleChange}
+                                    value={this.state.input}
                                 />
                             </div>
                             <div id="similar" className="col-6">
                                 <button
                                     className="button"
-                                    disabled={!enabled}
+                                    disabled={waiting || !ready}
                                     onClick={this.handleClick}
                                 >
-                                    Query
+                                    {ready ? "Query" : "loading"}
                                 </button>
                             </div>
                         </div>
                     </div>
-                    {/* <div className="response">
-                    <table v-if="data.length > 0">
-                        <thead>
-                            <tr>
-                                <th className="word">Word</th>
-                                <th className="distance">Distance</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="entry in data">
-                                <td className="word">"{{ entry[0] }}"</td>
-                                <td className="distance">"{{ entry[1] }}"</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div> */}
+
+                    {tableEl}
+                    {errorEl}
+
+                    <p className="small">
+                        For example:{" "}
+                        <a onClick={this.ex_france} href="#">
+                            France
+                        </a>
+                        ,{" "}
+                        <a onClick={this.ex_san_francisco} href="#">
+                            San Francisco
+                        </a>
+                        ,{" "}
+                        <a onClick={this.ex_apple} href="#">
+                            Apple
+                        </a>
+                        ,{" "}
+                        <a onClick={this.ex_dog} href="#">
+                            Dog
+                        </a>
+                        .
+                    </p>
                 </div>
             </div>
         );
