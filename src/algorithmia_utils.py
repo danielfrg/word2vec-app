@@ -130,7 +130,9 @@ def get_file(remote_fpath):
 def upload_file(
     local_filename, username, collection, fname, connector="data",
 ):
-    remote_file = f"{connector}://{username}/{collection}/{fname}"
+    remote_file = "{connector}://{username}/{collection}/{fname}".format(
+        connector=connector, username=username, collection=collection, fname=fname
+    )
     algo_client.file(remote_file).putFile(local_filename)
     return remote_file
 
