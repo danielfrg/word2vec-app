@@ -1,3 +1,2 @@
 algorithmia>=1.0.0,<2.0
-six
-word2vec==0.10.2
+word2vec==0.11.1

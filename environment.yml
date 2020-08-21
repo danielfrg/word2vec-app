@@ -1,0 +1,11 @@
+name: word2vec-app
+channels:
+  - conda-forge
+dependencies:
+  - python==3.8
+  - pip
+  - black
+  ##
+  - pip:
+    - algorithmia
+    - word2vec

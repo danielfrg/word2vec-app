@@ -10,28 +10,33 @@ client = Algorithmia.client()
 def gunzip(file):
     """
     gunzip a file that is downloaded by Algorithmia client
-    
+
     This files don't have a .gz extension e.g. "/tmp/tmpsva98zf4"
-    
+
     Returns the name of the unziped file
     gunzip extracts a file with the same name as the '___.gz' so it ends up being the same name as the original 'file' variable
     """
     import subprocess
+
     gzip = file
-    
+
     # Add .gz suffix (gunzip needs it)
     if not file.endswith(".gz"):
         new_gzip = file + ".gz"
         os.rename(file, new_gzip)
         gzip = new_gzip
-    
+
     try:
-        output = subprocess.check_output("gunzip -k -S _gz {gzip}".format(gzip=gzip), stderr=subprocess.STDOUT, shell=True).decode()
+        output = subprocess.check_output(
+            "gunzip -k -S _gz {gzip}".format(gzip=gzip),
+            stderr=subprocess.STDOUT,
+            shell=True,
+        ).decode()
         success = True
     except subprocess.CalledProcessError as e:
         output = e.output.decode()
         success = False
-    
+
     return file, success
 
 
@@ -42,12 +47,17 @@ def load_model(fname, *args, **kwargs):
             file, _ = gunzip(file)
     else:
         file = fname
-        
+
     model = word2vec.load(file, *args, **kwargs)
     return model
 
 
-model = load_model("data://danielfrg/word2vec/GoogleNews-vectors-negative300.bin.gz", kind="bin", encoding="ISO-8859-1", new_lines=False)
+model = load_model(
+    "data://danielfrg/word2vec/GoogleNews-vectors-negative300.bin.gz",
+    kind="bin",
+    encoding="ISO-8859-1",
+    new_lines=False,
+)
 # model = load_model("data://danielfrg/word2vec/text8.bin.gz", kind="bin")
 # model = load_model("data://danielfrg/word2vec/text8.bin", kind="bin")
 
@@ -95,7 +105,7 @@ def apply(queries):
     """
     single_query = True if isinstance(queries, dict) else False
     queries = [queries] if single_query else queries
-    
+
     responses = []
     for query in queries:
         resp = None
@@ -115,7 +125,7 @@ def apply(queries):
             else:
                 raise Exception("Unknown query '{key}'".format(key=key))
         responses.append(resp)
-    
+
     if single_query:
         return responses[0]
     return responses

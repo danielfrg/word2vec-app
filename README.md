@@ -1,18 +1,17 @@
-## word2vec
+# word2vec
 
 Word Vector functions based on word2vec.
 
 ## Data
 
-Model is trained on theon part of Google News dataset (about 100 billion words).
+Model is trained using part of Google News dataset (about 100 billion words).
 
-The model contains 300-dimensional vectors for 3 million words and phrases. 
+The model contains 300-dimensional vectors for 3 million words and phrases.
 
 ## Usage
 
-There is multiple functions available to query.
-The way this works is that you send one (or mutiple as a list) of json queries, where each query is defined as:
-    
+There are multiple functions available to query.
+
 1. vector: Get vectors for specific words
 2. distance: Calculate distances between the combinations of words
 3. closest: Get the closest n words and distances to a vector
@@ -28,7 +27,7 @@ Returns the vector that represent a word.
 | words | List of words |
 
 Example:
-    
+
 ```json
 {
     "vector":{
@@ -58,7 +57,7 @@ Returns the distance between all the combinations (r=2) of multiple words.
 | words | List of words |
 
 Example:
-    
+
 ```json
 {
     "distance":{
@@ -90,7 +89,7 @@ Get the n (default=10) closest words and respective distances to a vector.
 | n | (default=10) Top N items to return |
 
 Example:
-    
+
 ```json
 {
     "closest": {
@@ -128,7 +127,7 @@ Get the n (default=10) similar words and distances to one
 | n | (default=10) Top N items to return |
 
 Example:
-    
+
 ```json
 {
     "similar": {
