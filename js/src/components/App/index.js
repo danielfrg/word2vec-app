@@ -13,6 +13,11 @@ class App extends React.Component {
         this.state = {
             apiStatus: "init",
             error: "",
+            // error: {
+            //     error_type: "TestError",
+            //     message: "Test message",
+            //     stacktrace: "From ... \nmore code",
+            // },
         };
     }
 
@@ -46,21 +51,38 @@ class App extends React.Component {
         } else if (this.state.apiStatus == "ready") {
             statusText = "Model ready";
         }
-        let statusEl = <p className="api-status">Status: {statusText}</p>;
 
-        let errorEl = "";
+        const spinnerEl = (
+            <div className="spinner-border" role="status">
+                <span className="sr-only">Loading...</span>
+            </div>
+        );
+
+        let statusEl = (
+            <div className="status-line">
+                <p className="api-status">API Status: {statusText}</p>
+                {this.state.apiStatus == "ready" ||
+                this.state.apiStatus == "error"
+                    ? ""
+                    : spinnerEl}
+            </div>
+        );
+
+        let contentEl = "";
         if (this.state.error) {
-            errorEl = (
-                <p className="api-status">
-                    {this.state.error.error_type}: {this.state.error.message}
-                </p>
+            contentEl = (
+                <div className="error">
+                    <p>
+                        {this.state.error.error_type
+                            ? this.state.error.error_type
+                            : "Error"}
+                        : {this.state.error.message}
+                    </p>
+                    <p className="stacktrace">{this.state.error.stacktrace}</p>
+                </div>
             );
-        }
-
-        return (
-            <React.Fragment>
-                {statusEl}
-                {errorEl}
+        } else {
+            contentEl = (
                 <div className="row boxes">
                     <Distance
                         client={this.client}
@@ -71,6 +93,13 @@ class App extends React.Component {
                         apiStatus={this.state.apiStatus}
                     />
                 </div>
+            );
+        }
+
+        return (
+            <React.Fragment>
+                {statusEl}
+                {contentEl}
             </React.Fragment>
         );
     }

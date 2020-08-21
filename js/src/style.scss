@@ -52,10 +52,40 @@ h2.subtitle {
     }
 }
 
-.api-status {
+.status-line {
     text-align: center;
-    font-size: 0.6em;
-    margin-bottom: 0;
+    margin: -10px auto 0;
+    color: #000;
+
+    p {
+        display: inline-block;
+        font-size: 10px;
+        white-space: pre-line;
+        margin: 0;
+    }
+
+    .spinner-border {
+        width: 10px;
+        height: 10px;
+        // border: 1px solid #fff;
+        border: 1px solid currentColor;
+        border-right-color: transparent;
+        margin: 0 0 2px 3px;
+    }
+}
+
+div.error {
+    text-align: center;
+    p {
+        font-size: 14px;
+        white-space: pre-line;
+    }
+
+    p.stacktrace {
+        text-align: left;
+        font-size: 14px;
+        white-space: pre-line;
+    }
 }
 
 a {

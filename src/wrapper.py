@@ -1,6 +1,8 @@
 import numpy as np
 import word2vec
 
+from Algorithmia.errors import AlgorithmException
+
 
 class Word2vec(object):
     def __init__(self, fpath, verify=True, *args, **kwargs):
@@ -21,13 +23,17 @@ class Word2vec(object):
 
     def similar(self, word, n=10, metric="cosine"):
         if word not in self.model:
-            return {"error": "not_in_vocab", "word": word}
+            raise AlgorithmException(
+                '"{word}" not in vocab.'.format(word=word), "InputError"
+            )
         idx, metrics = self.model.similar(word, n=n, metric=metric)
         return self.model.generate_response(idx, metrics).tolist()
 
     def analogy(self, pos, neg, n=10, metric="cosine"):
         for word in pos + neg:
             if word not in self.model:
-                return {"error": "not_in_vocab", "word": word}
+                raise AlgorithmException(
+                    '"{word}" not in vocab.'.format(word=word), "InputError"
+                )
         idx, metrics = self.model.analogy(pos=pos, neg=neg, n=n, metric=metric)
         return self.model.generate_response(idx, metrics).tolist()

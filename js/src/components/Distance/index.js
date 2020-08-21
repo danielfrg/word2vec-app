@@ -24,9 +24,11 @@ class Distance extends React.Component {
 
         client.similar(this.state.input).then((response) => {
             if (response.error) {
-                this.setState({ apiStatus: "error", error: response.error });
+                this.setState({ error: response.error });
             } else {
-                console.log(response);
+                if (this.state.result.error) {
+                    // The API return but there was an internal error
+                }
                 this.setState({ waiting: false, result: response.result });
             }
         });
