@@ -20,7 +20,7 @@ class Distance extends React.Component {
     handleClick = (e) => {
         const { client } = this.props;
 
-        this.setState({ waiting: true });
+        this.setState({ waiting: true, result: "" });
 
         client.similar(this.state.input).then((response) => {
             if (response.error) {
@@ -74,17 +74,11 @@ class Distance extends React.Component {
         let tableEl = "";
         if (this.state.result) {
             let rows = this.state.result.map((result, index) => (
-                // <li key={index}>{result}</li>
                 <tr key={index}>
                     <td className="word">{result[0]}</td>
                     <td className="distance">{result[1]}</td>
                 </tr>
             ));
-
-            // <tr v-for="entry in data">
-            //     <td className="word">"{{ entry[0] }}"</td>
-            //     <td className="distance">"{{ entry[1] }}"</td>
-            // </tr>
 
             tableEl = (
                 <div className="response">
@@ -135,7 +129,7 @@ class Distance extends React.Component {
                     {errorEl}
 
                     <p className="small">
-                        For example:{" "}
+                        Examples:{" "}
                         <a onClick={this.ex_france} href="#">
                             France
                         </a>

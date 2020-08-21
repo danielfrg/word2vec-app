@@ -2,6 +2,7 @@ import React from "react";
 
 import Word2vec from "./algorithm";
 import Distance from "../Distance";
+import Analogy from "../Analogy";
 
 class App extends React.Component {
     constructor(props) {
@@ -37,9 +38,15 @@ class App extends React.Component {
     }
 
     render() {
-        let statusEl = (
-            <p className="api-status">Status: {this.state.apiStatus}</p>
-        );
+        let statusText = "";
+        if (this.state.apiStatus == "init") {
+            statusText = "Initializing API (~1-2 mins)";
+        } else if (this.state.apiStatus == "loading") {
+            statusText = "Loading model (~5 mins)";
+        } else if (this.state.apiStatus == "ready") {
+            statusText = "Model ready";
+        }
+        let statusEl = <p className="api-status">Status: {statusText}</p>;
 
         let errorEl = "";
         if (this.state.error) {
@@ -56,6 +63,10 @@ class App extends React.Component {
                 {errorEl}
                 <div className="row boxes">
                     <Distance
+                        client={this.client}
+                        apiStatus={this.state.apiStatus}
+                    />
+                    <Analogy
                         client={this.client}
                         apiStatus={this.state.apiStatus}
                     />
