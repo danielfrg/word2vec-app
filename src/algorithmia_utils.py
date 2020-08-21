@@ -138,4 +138,5 @@ def upload_file(
 
 
 if __name__ == "__main__":
-    print(extract_tar_gz("./models/text8.bin.tar.gz"))
+    # print(extract_tar_gz("./models/text8.bin.tar.gz"))
+    print(extract_tar_gz("./models/GoogleNews-vectors-negative300.bin.tar.gz"))

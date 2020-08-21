@@ -12,10 +12,10 @@ class Word2vecAPI(algorithmia_utils.BaseAPI):
     def load_model(self):
         if algorithmia_utils.in_algorithmia:
             model_fpath = algorithmia_utils.get_file(
-                "data://danielfrg/word2vec/GoogleNews-vectors-negative300.bin.gz"
+                "data://danielfrg/word2vec/GoogleNews-vectors-negative300.bin.tar.gz"
             )
         else:
-            model_fpath = "models/text8.bin"
+            # model_fpath = "models/text8.bin"
             model_fpath = "models/GoogleNews-vectors-negative300.bin"
 
         return wrapper.Word2vec(

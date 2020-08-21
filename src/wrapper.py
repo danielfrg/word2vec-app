@@ -1,16 +1,9 @@
-import os
-import json
-import uuid
-import base64
-import hashlib
-import tempfile
-
 import numpy as np
 import word2vec
 
 
 class Word2vec(object):
-    def __init__(self, fpath, load=True, *args, **kwargs):
+    def __init__(self, fpath, verify=True, *args, **kwargs):
         self.model = word2vec.load(fpath, *args, **kwargs)
 
     def vectors(self, words):
@@ -38,4 +31,3 @@ class Word2vec(object):
                 return {"error": "not_in_vocab", "word": word}
         idx, metrics = self.model.analogy(pos=pos, neg=neg, n=n, metric=metric)
         return self.model.generate_response(idx, metrics).tolist()
-

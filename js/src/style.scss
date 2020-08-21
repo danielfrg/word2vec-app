@@ -1,0 +1,197 @@
+$orange: #fc5726;
+$orange-light: #fc754d;
+$white: #ffffff;
+$grey: #313638;
+$btn-color: $grey;
+
+body {
+    color: $grey;
+    background: $orange;
+    font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji",
+        "Segoe UI Emoji", "Segoe UI Symbol";
+    font-size: 1.25rem;
+    font-weight: 300;
+}
+
+h1.title {
+    color: $white;
+    text-align: center;
+    width: 100%;
+    text-shadow: 6px 6px 0px #000;
+    font-family: "Anton", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji",
+        "Segoe UI Emoji", "Segoe UI Symbol";
+
+    font-size: 20vw;
+    @media screen and (min-width: 992px) {
+        font-size: 12em;
+    }
+}
+
+h2.subtitle {
+    color: $grey;
+    text-align: center;
+    width: 100%;
+    margin: -4vw 0 0 0;
+
+    font-family: "Anton", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji",
+        "Segoe UI Emoji", "Segoe UI Symbol";
+
+    font-size: 5.5vw;
+    @media screen and (min-width: 992px) {
+        font-size: 2.4em;
+        margin-top: -1em;
+    }
+}
+
+.api-status {
+    text-align: center;
+    font-size: 0.6em;
+    margin-bottom: 0;
+}
+
+a {
+    color: $grey;
+    text-decoration: underline;
+
+    &:hover {
+        color: #fff;
+    }
+}
+
+.snipper {
+    top: 15px;
+    right: 30px;
+    width: 25px;
+    height: 25px;
+    border: 6px solid $grey;
+    border-top: 6px solid $orange-light;
+    border-radius: 50%;
+    position: absolute;
+}
+
+.spin {
+    animation: spinner 1.5s linear infinite;
+}
+
+@keyframes spinner {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.hide {
+    display: none;
+}
+
+.box {
+    padding: 15px;
+    margin-bottom: 15px;
+    background: $orange-light;
+
+    h2 {
+        color: $grey;
+        font-size: 1.5em;
+        text-align: center;
+        font-family: "Anton", -apple-system, BlinkMacSystemFont, "Segoe UI",
+            Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji",
+            "Segoe UI Emoji", "Segoe UI Symbol";
+    }
+
+    .small {
+        font-size: 0.7em;
+    }
+
+    input {
+        border: 3px solid #fff;
+        width: 100%;
+        height: 100%;
+        min-height: 46px;
+        text-transform: lowercase;
+    }
+
+    .row {
+        margin-bottom: 10px;
+
+        .col-6 {
+            padding: 0;
+        }
+
+        .first-col {
+            padding-right: 10px;
+        }
+    }
+
+    .response {
+        table {
+            border: 3px solid $grey;
+            th {
+                padding: 10px;
+                border: 3px solid $grey;
+            }
+
+            td {
+                padding: 10px;
+                border: none;
+            }
+
+            .word {
+                width: 100%;
+            }
+
+            .distance {
+                width: 75px;
+            }
+        }
+    }
+
+    .error {
+        font-family: "Courier New", Courier, monospace;
+        font-size: 14px;
+    }
+
+    button {
+        border: 3px solid $btn-color;
+        padding: 11px 38px;
+        color: $btn-color;
+        font-family: "Anton", -apple-system, BlinkMacSystemFont, "Segoe UI",
+            Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji",
+            "Segoe UI Emoji", "Segoe UI Symbol";
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        text-align: center;
+        text-decoration: none;
+        line-height: 18px;
+        position: relative;
+        transition: color 0.2s, background-color 0.2s;
+        display: inline-block;
+        background-color: transparent;
+        width: 100%;
+
+        &:focus,
+        &:hover {
+            color: #fff;
+            background-color: $btn-color;
+            border: 3px solid $btn-color;
+        }
+
+        &:disabled {
+            cursor: not-allowed;
+
+            &:hover {
+                color: $btn-color;
+                background-color: transparent;
+            }
+        }
+    }
+}
+
+.footer {
+    text-align: center;
+    font-size: 0.6em;
+}
