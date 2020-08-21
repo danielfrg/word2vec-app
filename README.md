@@ -2,6 +2,8 @@
 
 Word Vector functions based on word2vec.
 
+[See the word2vec app here.](https://word2vec.extrapolations.dev)
+
 ## Data
 
 Model is trained using part of Google News dataset (about 100 billion words).
@@ -30,11 +32,13 @@ Example:
 
 ```json
 {
-    "vector":{
-        "words":[
-            "dog",
-            "cat"
-        ]
+    "predict":{
+        "vector":{
+            "words":[
+                "dog",
+                "cat"
+            ]
+        }
     }
 }
 ```
@@ -60,8 +64,10 @@ Example:
 
 ```json
 {
-    "distance":{
-        "words":["dog", "cat", "fish", "bird"]
+    "predict":{
+        "distance":{
+            "words":["dog", "cat", "fish", "bird"]
+        }
     }
 }
 ```
@@ -92,8 +98,10 @@ Example:
 
 ```json
 {
-    "closest": {
-        "vector": [0.02, 0.006, ...], "n": 10
+    "predict":{
+        "closest": {
+            "vector": [0.02, 0.006, ...], "n": 10
+        }
     }
 }
 ```
@@ -130,8 +138,10 @@ Example:
 
 ```json
 {
-    "similar": {
-        "word": "dog", "n": 3
+    "predict":{
+        "similar": {
+            "word": "dog", "n": 3
+        }
     }
 }
 ```
@@ -159,10 +169,12 @@ Compute an analogy based positive words and negative words, for example: `king -
 
 ```json
 {
-    "analogy":  {
-        "pos": ["king", "woman"],
-        "neg": ["man"],
-        "n": 5
+    "predict":{
+            "analogy":  {
+                "pos": ["king", "woman"],
+            "neg": ["man"],
+            "n": 5
+        }
     }
 }
 ```
@@ -177,16 +189,12 @@ Compute an analogy based positive words and negative words, for example: `king -
 ]
 ```
 
-### Multiple queries
+## Other endpoints
 
-You can query multiple times per request by just sending a list of queries:
+There are other functions that allows to query for the health and status of the
+API.
 
-```json
-[
-    {"vector":  { "words": ["dog", "cat"] } },
-    {"distance": { "words": ["dog", "cat", "fish"]} },
-    {"distance": { "words": ["dog", "cat", "fish"]} }
-]
-```
-
-The output will be a list with the response in the same order as the queries.
+1. `{"ping":""}` returns `true` when API is live, it doesn't load the model
+1. `{"health":""}` returns the status of the API from  `["live", "model_loaded"]`
+1. `{"load":""}` triggers the loading of the model into memory, return `ok` when done
+1. `{"debug":""}` returns debug information about the API and environment
