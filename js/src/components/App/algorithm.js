@@ -8,20 +8,20 @@ class Word2vec {
 
     ping() {
         return this.client
-            .algo("danielfrg/word2vec/0.4.0?timeout=500")
+            .algo("danielfrg/word2vec/0.4.1?timeout=500")
             .pipe({ ping: "" });
     }
 
     load() {
         return this.client
-            .algo("danielfrg/word2vec/0.4.0?timeout=500")
+            .algo("danielfrg/word2vec/0.4.1?timeout=500")
             .pipe({ load: "" });
     }
 
     similar(word) {
         // console.log(word);
         return this.client
-            .algo("danielfrg/word2vec/0.4.0")
+            .algo("danielfrg/word2vec/0.4.1")
             .pipe({ predict: { similar: { word: word, n: 10 } } });
     }
 
@@ -29,7 +29,7 @@ class Word2vec {
         // console.log(pos);
         // console.log(neg);
         return this.client
-            .algo("danielfrg/word2vec/0.4.0")
+            .algo("danielfrg/word2vec/0.4.1")
             .pipe({ predict: { analogy: { pos: pos, neg: neg, n: 10 } } });
     }
 }

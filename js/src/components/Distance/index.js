@@ -18,20 +18,18 @@ class Distance extends React.Component {
     };
 
     handleClick = (e) => {
-        const { client } = this.props;
+        if (this.state.input) {
+            const { client } = this.props;
+            this.setState({ waiting: true, result: "", error: "" });
 
-        this.setState({ waiting: true, result: "" });
-
-        client.similar(this.state.input).then((response) => {
-            if (response.error) {
-                this.setState({ error: response.error });
-            } else {
-                if (this.state.result.error) {
-                    // The API return but there was an internal error
+            client.similar(this.state.input).then((response) => {
+                if (response.error) {
+                    this.setState({ waiting: false, error: response.error });
+                } else {
+                    this.setState({ waiting: false, result: response.result });
                 }
-                this.setState({ waiting: false, result: response.result });
-            }
-        });
+            });
+        }
     };
 
     ex_france = (e) => {
@@ -60,9 +58,9 @@ class Distance extends React.Component {
             ready = true;
         }
 
-        let errorEl = "";
+        let contentEl = "";
         if (this.state.error) {
-            errorEl = (
+            contentEl = (
                 <Fragment>
                     <p className="error">
                         {this.state.error.error_type}:{" "}
@@ -73,7 +71,6 @@ class Distance extends React.Component {
             );
         }
 
-        let tableEl = "";
         if (this.state.result) {
             let rows = this.state.result.map((result, index) => (
                 <tr key={index}>
@@ -82,7 +79,7 @@ class Distance extends React.Component {
                 </tr>
             ));
 
-            tableEl = (
+            contentEl = (
                 <div className="response">
                     <table>
                         <thead>
@@ -127,8 +124,7 @@ class Distance extends React.Component {
                         </div>
                     </div>
 
-                    {tableEl}
-                    {errorEl}
+                    {contentEl}
 
                     <p className="small">
                         Examples:{" "}

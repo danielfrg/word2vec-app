@@ -29,21 +29,20 @@ class Analogy extends React.Component {
             this.state.input_pos1,
             this.state.input_pos2,
             this.state.input_pos3,
-        ];
+        ].filter(Boolean);
         const neg = [
             this.state.input_neg1,
             this.state.input_neg2,
             this.state.input_neg3,
-        ];
+        ].filter(Boolean);
 
-        this.setState({ waiting: true, result: "" });
+        if (pos.length > 0 || neg.length > 0) {
+            this.setState({ waiting: true, result: "", error: "" });
 
-        client
-            .analogy(pos.filter(Boolean), neg.filter(Boolean))
-            .then((response) => {
+            client.analogy(pos, neg).then((response) => {
                 if (response.error) {
                     this.setState({
-                        apiStatus: "error",
+                        waiting: false,
                         error: response.error,
                     });
                 } else {
@@ -51,6 +50,7 @@ class Analogy extends React.Component {
                     this.setState({ waiting: false, result: response.result });
                 }
             });
+        }
     };
 
     ex_queen = (e) => {
