@@ -19,6 +19,8 @@ git push -u github master
 3. Make sure to push to both upstreams
 
 ```
+git push -u github master
+git push -u origin master
 ```
 
 4. To update the JS app:
