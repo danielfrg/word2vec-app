@@ -27,7 +27,7 @@ class Distance extends React.Component {
     render() {
         const { apiStatus } = this.props;
 
-        let enabled = true;
+        let enabled = false;
         if (apiStatus == "ready") {
             enabled = true;
         }

@@ -10,7 +10,7 @@ class App extends React.Component {
         this.client = new Word2vec();
 
         this.state = {
-            apiStatus: "",
+            apiStatus: "init",
             error: "",
         };
     }

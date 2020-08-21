@@ -120,7 +120,7 @@ def get_file(remote_fpath):
         local_fpath = algo_client.file(remote_fpath).getFile().name
 
         if basename.endswith(".tar.gz"):
-            output_dir = extract_tar_gz(fname)
+            output_dir = extract_tar_gz(local_fpath)
             no_ext = basename[: -len(".tar.gz")]
             local_fpath = os.path.join(output_dir, no_ext)
 
