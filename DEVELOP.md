@@ -29,5 +29,3 @@ git push -u origin master
 cd js
 npm run build
 ```
-
-And upload to Netlify the `dist` directory. No CI because this rarely gets updated.
