@@ -1,10 +1,14 @@
 # word2vec
 
 [![Site](https://github.com/danielfrg/word2vec-app/workflows/deploy/badge.svg)](https://word2vec.danielfrg.com)
+[![License](https://img.shields.io/:license-Apache%202-blue.svg)](https://github.com/danielfrg/jupyter-flex/blob/master/LICENSE.txt)
 
 Word Vector functions based on word2vec.
 
-[See the word2vec app here.](https://word2vec.danielfrg.dev)
+[Online App](https://word2vec.danielfrg.dev/) -
+[Algorithm](https://algorithmia.com/algorithms/danielfrg/demucs)
+
+![word2vec-app](https://raw.githubusercontent.com/danielfrg/word2vec-app/master/word2vec-app.png)
 
 ## Data
 
