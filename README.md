@@ -1,4 +1,4 @@
-# word2vec
+# word2vec-app
 
 [![Site](https://github.com/danielfrg/word2vec-app/workflows/deploy/badge.svg)](https://word2vec.danielfrg.com)
 [![License](https://img.shields.io/:license-Apache%202-blue.svg)](https://github.com/danielfrg/word2vec/blob/master/LICENSE.txt)
