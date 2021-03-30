@@ -1,5 +1,5 @@
 This app was developed before Algorithmia could integrate with GitHub
-so we need to clone and push directly to Algorithmia for new builds of the API.
+so we need to clone directly from Algorithmia.
 
 1. Clone the repo using Algorithmia
 
@@ -13,19 +13,19 @@ Make code changes and push will build a new version of the API.
 
 ```
 git remote add github git@github.com:danielfrg/word2vec-app.git
-git push -u github master
 ```
 
 3. Make sure to push to both upstreams
 
 ```
-git push -u github master
 git push -u origin master
+git push -u github master
 ```
 
 4. To update the JS app:
 
 ```
 cd js
-npm run build
+npm i
+npm run dev
 ```

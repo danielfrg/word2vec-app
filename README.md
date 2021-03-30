@@ -1,8 +1,10 @@
 # word2vec
 
+[![Site](https://github.com/danielfrg/word2vec-app/workflows/deploy/badge.svg)](https://word2vec.danielfrg.com)
+
 Word Vector functions based on word2vec.
 
-[See the word2vec app here.](https://word2vec.extrapolations.dev)
+[See the word2vec app here.](https://word2vec.danielfrg.dev)
 
 ## Data
 
