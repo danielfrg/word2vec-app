@@ -5,10 +5,10 @@
 
 Word Vector functions based on word2vec.
 
-[Online App](https://word2vec.danielfrg.dev/) -
+[Online App](https://word2vec.danielfrg.com) -
 [Algorithm](https://algorithmia.com/algorithms/danielfrg/demucs)
 
-![word2vec-app](https://raw.githubusercontent.com/danielfrg/word2vec-app/master/word2vec-app.png)
+[![word2vec-app](https://raw.githubusercontent.com/danielfrg/word2vec-app/master/word2vec-app.png)](https://word2vec.danielfrg.com)
 
 ## Data
 
