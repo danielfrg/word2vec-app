@@ -1,31 +1,48 @@
+# Development
+
 This app was developed before Algorithmia could integrate with GitHub
 so we need to clone directly from Algorithmia.
-
-1. Clone the repo using Algorithmia
 
 ```
 git clone https://git.algorithmia.com/git/danielfrg/word2vec.git word2vec-app
 ```
 
-Make code changes and push will build a new version of the API.
+## Model API
 
-2. Setup Github remote to have it also there
-
-```
-git remote add github git@github.com:danielfrg/word2vec-app.git
-```
-
-3. Make sure to push to both upstreams
+Create conda env
 
 ```
-git push -u origin master
-git push -u github master
+mamba env create
+conda activate word2vec-app
 ```
 
-4. To update the JS app:
+Run the code in `src`:
+
+```
+python algorithmia_entrypoint.py
+```
+
+Push will build a new version of the API.
+
+## JavaScript App
 
 ```
 cd js
 npm i
 npm run dev
+```
+
+## Push to GitHub
+
+Setup Github remote to have it also there
+
+```
+git remote add github git@github.com:danielfrg/word2vec-app.git
+```
+
+Make sure to push to both upstreams
+
+```
+git push -u origin master  # This will take a while while it build in Algorithmia
+git push -u github master
 ```

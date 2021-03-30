@@ -31,14 +31,6 @@ jobs:
         run: |
           make npm-build
 
-      - name: Push docs (branch)
-        uses: jsmrcaga/action-netlify-deploy@master
-        if: github.event_name == 'pull_request'
-        with:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-          build_directory: js/dist
-
       - name: Push docs (master)
         uses: jsmrcaga/action-netlify-deploy@master
         if: (github.event_name == 'push') && endsWith(github.ref, '/master')
@@ -46,6 +38,14 @@ jobs:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
           NETLIFY_DEPLOY_TO_PROD: true
+          build_directory: js/dist
+
+      - name: Push docs (branch)
+        uses: jsmrcaga/action-netlify-deploy@master
+        if: github.event_name == 'pull_request'
+        with:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
           build_directory: js/dist
 
       - name: Upload website
