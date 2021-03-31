@@ -63,7 +63,6 @@ class Analogy extends React.Component {
             input_neg2: "",
             input_neg3: "",
         });
-        this.handleClick(null);
     };
 
     ex_cold = (e) => {
@@ -76,7 +75,6 @@ class Analogy extends React.Component {
             input_neg2: "",
             input_neg3: "",
         });
-        this.handleClick(null);
     };
 
     ex_niece = (e) => {
@@ -89,7 +87,6 @@ class Analogy extends React.Component {
             input_neg2: "",
             input_neg3: "",
         });
-        this.handleClick(null);
     };
 
     ex_madrid = (e) => {
@@ -102,7 +99,6 @@ class Analogy extends React.Component {
             input_neg2: "rome",
             input_neg3: "",
         });
-        this.handleClick(null);
     };
     ex_unicorn = (e) => {
         e.preventDefault();
@@ -114,7 +110,6 @@ class Analogy extends React.Component {
             input_neg2: "",
             input_neg3: "",
         });
-        this.handleClick(null);
     };
 
     render() {

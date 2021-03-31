@@ -35,22 +35,18 @@ class Distance extends React.Component {
     ex_france = (e) => {
         e.preventDefault();
         this.setState({ input: "france" });
-        this.handleClick(null);
     };
     ex_san_francisco = (e) => {
         e.preventDefault();
         this.setState({ input: "san_francisco" });
-        this.handleClick(null);
     };
     ex_apple = (e) => {
         e.preventDefault();
         this.setState({ input: "apple" });
-        this.handleClick(null);
     };
     ex_dog = (e) => {
         e.preventDefault();
         this.setState({ input: "dog" });
-        this.handleClick(null);
     };
 
     render() {

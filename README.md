@@ -11,7 +11,7 @@ Word Vector functions based on word2vec.
 [![word2vec-app](https://raw.githubusercontent.com/danielfrg/word2vec-app/master/word2vec-app.png)](https://word2vec.danielfrg.com)
 
 ## Data
-ake
+
 Model is trained using part of Google News dataset (about 100 billion words).
 
 The model contains 300-dimensional vectors for 3 million words and phrases.
