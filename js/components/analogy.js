@@ -118,9 +118,9 @@ export default function Analogy({ apiStatus, client }) {
         ready = true;
     }
 
-    let errorEl = "";
+    let content;
     if (error) {
-        errorEl = (
+        content = (
             <>
                 <p className="error">
                     {error.error_type}: {error.message}
@@ -128,10 +128,7 @@ export default function Analogy({ apiStatus, client }) {
                 <p className="error">{error.stacktrace}</p>
             </>
         );
-    }
-
-    let table = "";
-    if (result) {
+    } else if (result) {
         let rows = result.map((result, index) => (
             <tr key={index}>
                 <td className="word">{result[0]}</td>
@@ -174,6 +171,7 @@ export default function Analogy({ apiStatus, client }) {
             <Grid item>
                 <p>Find the most similar words with an operation</p>
             </Grid>
+
             <Grid item container xs={12} spacing={2} className="inputs">
                 <Grid container className="inputs" direction="row" spacing={2}>
                     <Grid item xs={6}>
@@ -244,8 +242,7 @@ export default function Analogy({ apiStatus, client }) {
             </Grid>
 
             <Grid item xs={12}>
-                {table}
-                {errorEl}
+                {content}
             </Grid>
 
             <Grid item xs={12}>

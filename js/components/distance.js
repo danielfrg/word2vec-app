@@ -62,7 +62,7 @@ export default function Distance({ apiStatus, client }) {
         ready = true;
     }
 
-    let content = "";
+    let content;
     if (error) {
         content = (
             <Fragment>
@@ -72,9 +72,7 @@ export default function Distance({ apiStatus, client }) {
                 <p className="error">{error.stacktrace}</p>
             </Fragment>
         );
-    }
-
-    if (result) {
+    } else if (result) {
         let rows = result.map((result, index) => (
             <tr key={index}>
                 <td className="word">{result[0]}</td>
@@ -99,7 +97,14 @@ export default function Distance({ apiStatus, client }) {
 
     return (
         <Grid container className={clsx("box")} spacing={2}>
-            <Grid container direction="row" spacing={5} justifyContent="center">
+            <Grid
+                item
+                container
+                xs={12}
+                spacing={5}
+                direction="row"
+                justifyContent="center"
+            >
                 <Grid item>
                     <h2>Top N similar</h2>
                 </Grid>
@@ -107,10 +112,11 @@ export default function Distance({ apiStatus, client }) {
                     {waiting ? <CircularProgress color="inherit" /> : null}
                 </Grid> */}
             </Grid>
-            <Grid item>
+            <Grid item xs={12}>
                 <p>Find the most similar words</p>
             </Grid>
-            <Grid container spacing={2}>
+
+            <Grid item container xs={12} spacing={2}>
                 <Grid container className="inputs" direction="row" spacing={2}>
                     <Grid item xs={6}>
                         <input
@@ -136,9 +142,11 @@ export default function Distance({ apiStatus, client }) {
                 </Grid>
             </Grid>
 
-            {content}
+            <Grid item xs={12}>
+                {content}
+            </Grid>
 
-            <Grid item>
+            <Grid item xs={12}>
                 <p className="small">
                     Examples:{" "}
                     <a onClick={ex_france} href="#">
