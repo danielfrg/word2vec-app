@@ -32,24 +32,24 @@ class Index extends React.Component {
 
         this.setState({ client: client });
 
-        // client.ping().then((response) => {
-        //     if (response.error) {
-        //         this.setState({ apiStatus: "error", error: response.error });
-        //     } else {
-        //         this.setState({ apiStatus: "loading" });
+        client.ping().then((response) => {
+            if (response.error) {
+                this.setState({ apiStatus: "error", error: response.error });
+            } else {
+                this.setState({ apiStatus: "loading" });
 
-        //         this.client.load().then((response) => {
-        //             if (response.error) {
-        //                 this.setState({
-        //                     apiStatus: "error",
-        //                     error: response.error,
-        //                 });
-        //             } else {
-        //                 this.setState({ apiStatus: "ready" });
-        //             }
-        //         });
-        //     }
-        // });
+                this.client.load().then((response) => {
+                    if (response.error) {
+                        this.setState({
+                            apiStatus: "error",
+                            error: response.error,
+                        });
+                    } else {
+                        this.setState({ apiStatus: "ready" });
+                    }
+                });
+            }
+        });
     }
 
     render() {
