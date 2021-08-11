@@ -15,17 +15,17 @@ build: npm-build  ## Build site
 # Build (JS)
 
 npm-build:  ## Build website
-	cd $(CURDIR)/jsnpm run build
-	cd $(CURDIR)jsnpm run export
+	cd $(CURDIR)/js; npm run build
+	cd $(CURDIR)/js; npm run export
 
 
 npm-i: npm-install
 npm-install:  ## Install JS dependencies
-	cd $(CURDIR)jsnpm install
+	cd $(CURDIR)/js; npm install
 
 
 npm-dev:  ## Run dev server
-	cd $(CURDIR)jsnpm run dev
+	cd $(CURDIR)/js; npm run dev
 
 
 cleanjs:  ## Clean JS files
