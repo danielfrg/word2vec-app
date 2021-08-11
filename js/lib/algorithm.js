@@ -1,8 +1,8 @@
-// This is being loaded on the HTML head
-const Algorithmia = window.Algorithmia;
-
-class Word2vec {
+class Algorithm {
     constructor() {
+        // This is being loaded on the HTML head
+        const Algorithmia = window.Algorithmia;
+
         this.client = Algorithmia.client("simNkidTbC0XeTmxJEdslAAVE3K1");
     }
 
@@ -34,4 +34,4 @@ class Word2vec {
     }
 }
 
-export default Word2vec;
+export default Algorithm;
