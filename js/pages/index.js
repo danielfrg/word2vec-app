@@ -66,17 +66,6 @@ class Index extends React.Component {
             statusText = "ERROR";
         }
 
-        let statusEl = (
-            <div className="status-line">
-                <p className="api-status">API Status: {statusText}</p>
-                {apiStatus == "ready" || apiStatus == "error" ? (
-                    ""
-                ) : (
-                    <CircularProgress size={10} color="inherit" />
-                )}
-            </div>
-        );
-
         let content = "";
         if (error) {
             content = (
@@ -115,7 +104,20 @@ class Index extends React.Component {
                             <h2 className="subtitle">
                                 Word embedding functions
                             </h2>
-                            {statusEl}
+                            <div className="status-line">
+                                <p className="api-status">
+                                    API Status: {statusText}
+                                </p>
+                                {apiStatus == "ready" ||
+                                apiStatus == "error" ? (
+                                    ""
+                                ) : (
+                                    <CircularProgress
+                                        size={10}
+                                        color="inherit"
+                                    />
+                                )}
+                            </div>
                         </header>
                     </Grid>
 

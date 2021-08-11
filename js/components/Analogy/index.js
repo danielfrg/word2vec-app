@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import clsx from "clsx";
 
 import { makeStyles } from "@material-ui/core/styles";
@@ -123,12 +123,12 @@ export default function Analogy({ apiStatus, client }) {
     let errorEl = "";
     if (error) {
         errorEl = (
-            <Fragment>
+            <>
                 <p className="error">
                     {error.error_type}: {error.message}
                 </p>
                 <p className="error">{error.stacktrace}</p>
-            </Fragment>
+            </>
         );
     }
 
