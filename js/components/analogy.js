@@ -47,8 +47,6 @@ export default function Analogy({ apiStatus, client }) {
     };
 
     const handleClick = (e) => {
-        const { client } = this.props;
-
         const pos = [inputPos1, inputPos2, inputPos3].filter(Boolean);
         const neg = [inputNeg1, inputNeg2, inputNeg3].filter(Boolean);
 
@@ -157,7 +155,7 @@ export default function Analogy({ apiStatus, client }) {
     }
 
     return (
-        <Grid container className={clsx("box")} justifyContent="">
+        <Grid container className={clsx("box")} spacing={2}>
             <Grid
                 item
                 container
@@ -241,12 +239,14 @@ export default function Analogy({ apiStatus, client }) {
                     disabled={waiting || !ready}
                     onClick={handleClick}
                 >
-                    {ready ? "Query" : "loading"}
+                    {ready ? (waiting ? "waiting" : "query") : "loading"}
                 </button>
             </Grid>
 
-            {table}
-            {errorEl}
+            <Grid item xs={12}>
+                {table}
+                {errorEl}
+            </Grid>
 
             <Grid item xs={12}>
                 <p className="small">

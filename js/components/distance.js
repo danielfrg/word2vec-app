@@ -98,7 +98,7 @@ export default function Distance({ apiStatus, client }) {
     }
 
     return (
-        <Grid container className={clsx("box")} justifyContent="">
+        <Grid container className={clsx("box")} spacing={2}>
             <Grid container direction="row" spacing={5} justifyContent="center">
                 <Grid item>
                     <h2>Top N similar</h2>
@@ -126,7 +126,11 @@ export default function Distance({ apiStatus, client }) {
                             disabled={waiting || !ready}
                             onClick={handleClick}
                         >
-                            {ready ? "Query" : "loading"}
+                            {ready
+                                ? waiting
+                                    ? "waiting"
+                                    : "query"
+                                : "loading"}
                         </button>
                     </Grid>
                 </Grid>

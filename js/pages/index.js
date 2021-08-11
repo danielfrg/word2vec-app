@@ -5,8 +5,8 @@ import { Grid } from "@material-ui/core";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 import Algorithm from "../lib/algorithm";
-import Distance from "../components/Distance";
-import Analogy from "../components/Analogy";
+import Distance from "../components/distance";
+import Analogy from "../components/analogy";
 
 const styles = (theme) => ({
     space: {},
@@ -33,12 +33,18 @@ class Index extends React.Component {
         this.setState({ client: client });
 
         client.ping().then((response) => {
+            console.log("API Ping response:");
+            console.log(response);
+
             if (response.error) {
                 this.setState({ apiStatus: "error", error: response.error });
             } else {
                 this.setState({ apiStatus: "loading" });
 
-                this.client.load().then((response) => {
+                client.load().then((response) => {
+                    console.log("API Load response:");
+                    console.log(response);
+
                     if (response.error) {
                         this.setState({
                             apiStatus: "error",
@@ -82,7 +88,7 @@ class Index extends React.Component {
                 <Grid
                     container
                     className="boxes"
-                    spacing={3}
+                    spacing={6}
                     justifyContent="center"
                 >
                     <Grid item xs={5}>
@@ -97,8 +103,8 @@ class Index extends React.Component {
 
         return (
             <>
-                <Grid container className="container" spacing={4}>
-                    <Grid item xs={12}>
+                <Grid container className="container" direction="column">
+                    <Grid item>
                         <header>
                             <h1 className="title">WORD2VEC</h1>
                             <h2 className="subtitle">
@@ -121,14 +127,14 @@ class Index extends React.Component {
                         </header>
                     </Grid>
 
-                    <Grid item xs={12}>
-                        {content}
-                    </Grid>
+                    <Grid item>{content}</Grid>
 
-                    <Grid item xs={12} className="inputs">
+                    <Grid item xs />
+
+                    <Grid item>
                         <footer>
                             <p>
-                                Built by
+                                Built by{" "}
                                 <a href="https://danielfrg.com/">
                                     Daniel Rodriguez
                                 </a>
