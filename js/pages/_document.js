@@ -11,7 +11,7 @@ class MyDocument extends Document {
 
     render() {
         return (
-            <Html html="en">
+            <Html lang="en">
                 <Head>
                     <meta charSet="utf-8" />
                     <meta
@@ -56,6 +56,7 @@ class MyDocument extends Document {
                         }}
                     />
                 </Head>
+
                 <body className="w-full h-full bg-orange">
                     <Main />
                     <NextScript />
