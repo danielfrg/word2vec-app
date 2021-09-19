@@ -1,0 +1,31 @@
+.title {
+    text-shadow: 6px 6px 0 #000;
+}
+
+table {
+    color: #313638;
+    border: 2px solid #313638;
+    border-spacing: 0;
+
+    th {
+        padding: 10px;
+        border-bottom: 2px solid #313638;
+    }
+
+    th:first-child {
+        border-right: 2px solid #313638;
+    }
+
+    td {
+        padding: 10px;
+        border: none;
+    }
+
+    .word {
+        width: 100%;
+    }
+
+    .distance {
+        width: 75px;
+    }
+}

@@ -1,29 +1,22 @@
 import React from "react";
 
-import { withStyles } from "@material-ui/core/styles";
-import { Grid } from "@material-ui/core";
-import CircularProgress from "@material-ui/core/CircularProgress";
-
 import Algorithm from "../lib/algorithm";
 import Distance from "../components/distance";
 import Analogy from "../components/analogy";
-
-const styles = (theme) => ({
-    space: {},
-});
 
 class Index extends React.Component {
     constructor(props) {
         super(props);
 
+        const testError = {
+            error_type: "TestError",
+            message: "Test message",
+            stacktrace: "From ... \nmore code",
+        };
+
         this.state = {
             apiStatus: "init",
             error: "",
-            // error: {
-            //     error_type: "TestError",
-            //     message: "Test message",
-            //     stacktrace: "From ... \nmore code",
-            // },
         };
     }
 
@@ -59,7 +52,7 @@ class Index extends React.Component {
     }
 
     render() {
-        const { classes, client, apiStatus, error } = this.state;
+        const { client, apiStatus, error } = this.state;
 
         let statusText = "";
         if (apiStatus == "init") {
@@ -75,89 +68,80 @@ class Index extends React.Component {
         let content = "";
         if (error) {
             content = (
-                <div className="error">
+                <div className="mx-auto max-w-screen-md text-primary font-light">
                     <p>
                         {error.error_type ? error.error_type : "Error"}:{" "}
                         {error.message}
                     </p>
-                    <p className="stacktrace">{error.stacktrace}</p>
+                    <p>{error.stacktrace}</p>
                 </div>
             );
         } else {
             content = (
-                <Grid
-                    container
-                    className="boxes"
-                    spacing={6}
-                    justifyContent="center"
-                >
-                    <Grid item xs={5}>
-                        <Distance client={client} apiStatus={apiStatus} />
-                    </Grid>
-                    <Grid item xs={5}>
-                        <Analogy client={client} apiStatus={apiStatus} />
-                    </Grid>
-                </Grid>
+                <div className="grid gap-2 grid-cols-1 md:grid-cols-2 justify-evenly">
+                    <Distance client={client} apiStatus={apiStatus}></Distance>
+                    <Analogy client={client} apiStatus={apiStatus}></Analogy>
+                </div>
             );
         }
 
         return (
             <>
-                <Grid container className="container" direction="column">
-                    <Grid item>
-                        <header>
-                            <h1 className="title">WORD2VEC</h1>
-                            <h2 className="subtitle">
-                                Word embedding functions
-                            </h2>
-                            <div className="status-line">
-                                <p className="api-status">
-                                    API Status: {statusText}
-                                </p>
-                                {apiStatus == "ready" ||
-                                apiStatus == "error" ? (
-                                    ""
-                                ) : (
-                                    <CircularProgress
-                                        size={10}
-                                        color="inherit"
-                                    />
-                                )}
-                            </div>
-                        </header>
-                    </Grid>
-
-                    <Grid item>{content}</Grid>
-
-                    <Grid item xs />
-
-                    <Grid item>
-                        <footer>
-                            <p>
-                                Built by{" "}
-                                <a href="https://danielfrg.com/">
-                                    Daniel Rodriguez
-                                </a>
-                                . Powered by{" "}
-                                <a href="https://algorithmia.com/algorithms/danielfrg/word2vec">
-                                    Algorithmia
-                                </a>
-                                .{" "}
-                                <a href="https://github.com/danielfrg/word2vec-app">
-                                    Code on Github
-                                </a>
-                                .{" "}
-                                <a href="https://danielfrg.com/blog/2018/09/word2vec-app-algorithmia/">
-                                    More info
-                                </a>
-                                .
+                <div className="mx-auto max-w-screen-lg flex flex-col h-screen justify-between">
+                    <header className="my-10">
+                        <h1 className="text-center text-white title text-7xl lg:text-title font-comic">
+                            WORD2VEC
+                        </h1>
+                        <h2 className="text-center text-gray-800 text-3xl subtitle font-comic">
+                            Word embedding functions
+                        </h2>
+                        <div className="text-center font-light text-xs text-gray-700">
+                            <p className="api-status">
+                                API Status: {statusText}
                             </p>
-                        </footer>
-                    </Grid>
-                </Grid>
+                            {apiStatus == "ready" || apiStatus == "error" ? (
+                                ""
+                            ) : (
+                                <svg
+                                    className="animate-spin h-5 w-5 mr-3 ..."
+                                    viewBox="0 0 24 24"
+                                ></svg>
+                            )}
+                        </div>
+                    </header>
+
+                    <main className="mb-auto">{content}</main>
+
+                    <footer className="mx-auto my-4 py-5 font-light">
+                        <p className="text-primary text-sm">
+                            Built by{" "}
+                            <a
+                                className="underline hover:text-white"
+                                href="https://danielfrg.com/"
+                            >
+                                Daniel Rodriguez
+                            </a>
+                            .{" "}
+                            <a
+                                className="underline hover:text-white"
+                                href="https://github.com/danielfrg/word2vec-app"
+                            >
+                                Code on Github
+                            </a>
+                            .{" "}
+                            <a
+                                className="underline hover:text-white"
+                                href="https://danielfrg.com/blog/2018/09/word2vec-app-algorithmia/"
+                            >
+                                More info
+                            </a>
+                            .
+                        </p>
+                    </footer>
+                </div>
             </>
         );
     }
 }
 
-export default withStyles(styles, { withTheme: true })(Index);
+export default Index;

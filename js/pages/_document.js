@@ -11,19 +11,23 @@ class MyDocument extends Document {
 
     render() {
         return (
-            <Html>
+            <Html html="en">
                 <Head>
                     <meta charSet="utf-8" />
-                    <link
-                        rel="shortcut icon"
-                        type="image/png"
-                        href="/favicon.png"
+                    <meta
+                        name="description"
+                        content="word2vec online App - Word embedding functions"
                     />
                     <meta
                         httpEquiv="X-UA-Compatible"
                         content="IE=edge,chrome=1"
                     ></meta>
 
+                    <link
+                        rel="shortcut icon"
+                        type="image/png"
+                        href="/favicon.png"
+                    />
                     <link
                         href="https://fonts.googleapis.com/css?family=Anton|Montserrat"
                         rel="stylesheet"
@@ -52,7 +56,7 @@ class MyDocument extends Document {
                         }}
                     />
                 </Head>
-                <body>
+                <body className="w-full h-full bg-orange">
                     <Main />
                     <NextScript />
                 </body>

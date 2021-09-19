@@ -1,18 +1,6 @@
 import React, { Fragment } from "react";
-import clsx from "clsx";
-
-import { makeStyles } from "@material-ui/core/styles";
-import { Grid } from "@material-ui/core";
-import CircularProgress from "@material-ui/core/CircularProgress";
-
-const useStyles = makeStyles((theme) => ({
-    box: {
-        backgroundColor: "#fc754d",
-    },
-}));
 
 export default function Distance({ apiStatus, client }) {
-    const classes = useStyles();
     const [waiting, setWaiting] = React.useState(false);
     const [result, setResult] = React.useState("");
     const [error, setError] = React.useState("");
@@ -81,10 +69,10 @@ export default function Distance({ apiStatus, client }) {
         ));
 
         content = (
-            <div className="response">
+            <div>
                 <table>
                     <thead>
-                        <tr>
+                        <tr className="">
                             <th className="word">Word</th>
                             <th className="distance">Distance</th>
                         </tr>
@@ -96,77 +84,75 @@ export default function Distance({ apiStatus, client }) {
     }
 
     return (
-        <Grid container className={clsx("box")} spacing={2}>
-            <Grid
-                item
-                container
-                xs={12}
-                spacing={5}
-                direction="row"
-                justifyContent="center"
-            >
-                <Grid item>
-                    <h2>Top N similar</h2>
-                </Grid>
-                {/* <Grid item>
-                    {waiting ? <CircularProgress color="inherit" /> : null}
-                </Grid> */}
-            </Grid>
-            <Grid item xs={12}>
-                <p>Find the most similar words</p>
-            </Grid>
+        <div className="w-full h-full bg-orange-light">
+            <div className="p-4 grid gap-2 grid-flow-row justify-evenly">
+                <div>
+                    <h2 className="font-comic text-primary text-3xl text-center">
+                        Top N similar
+                    </h2>
+                    <p className="text-center text-primary font-light">
+                        Find the most similar words
+                    </p>
+                </div>
 
-            <Grid item container xs={12} spacing={2}>
-                <Grid container className="inputs" direction="row" spacing={2}>
-                    <Grid item xs={6}>
-                        <input
-                            type="text"
-                            placeholder="WORD"
-                            onChange={handleChange}
-                            value={input}
-                        />
-                    </Grid>
-                    <Grid item xs={6}>
-                        <button
-                            className="button"
-                            disabled={waiting || !ready}
-                            onClick={handleClick}
+                <div className="grid gap-2 grid-cols-2 font-sans">
+                    <input
+                        type="text"
+                        placeholder="WORD"
+                        onChange={handleChange}
+                        value={input}
+                        className="p-2"
+                    />
+
+                    <button
+                        className="border-2 border-primary text-primary font-comic tracking-widest hover:bg-primary hover:text-white"
+                        disabled={waiting || !ready}
+                        onClick={handleClick}
+                    >
+                        {ready ? (waiting ? "waiting" : "query") : "loading"}
+                    </button>
+                </div>
+
+                <div className="mb-auto">{content}</div>
+
+                <div className="">
+                    <p className="small font-light text-primary text-sm">
+                        Examples:{" "}
+                        <a
+                            className="underline hover:text-white"
+                            onClick={ex_france}
+                            href="#"
                         >
-                            {ready
-                                ? waiting
-                                    ? "waiting"
-                                    : "query"
-                                : "loading"}
-                        </button>
-                    </Grid>
-                </Grid>
-            </Grid>
-
-            <Grid item xs={12}>
-                {content}
-            </Grid>
-
-            <Grid item xs={12}>
-                <p className="small">
-                    Examples:{" "}
-                    <a onClick={ex_france} href="#">
-                        France
-                    </a>
-                    ,{" "}
-                    <a onClick={ex_san_francisco} href="#">
-                        San Francisco
-                    </a>
-                    ,{" "}
-                    <a onClick={ex_apple} href="#">
-                        Apple
-                    </a>
-                    ,{" "}
-                    <a onClick={ex_dog} href="#">
-                        Dog
-                    </a>
-                    .
-                </p>
-            </Grid>
-        </Grid>
+                            France
+                        </a>
+                        ,{" "}
+                        <a
+                            className="underline hover:text-white"
+                            onClick={ex_san_francisco}
+                            href="#"
+                        >
+                            San Francisco
+                        </a>
+                        ,{" "}
+                        <a
+                            className="underline hover:text-white"
+                            onClick={ex_apple}
+                            href="#"
+                        >
+                            Apple
+                        </a>
+                        ,{" "}
+                        <a
+                            className="underline hover:text-white"
+                            onClick={ex_dog}
+                            href="#"
+                        >
+                            Dog
+                        </a>
+                        .
+                    </p>
+                </div>
+            </div>
+        </div>
     );
 }

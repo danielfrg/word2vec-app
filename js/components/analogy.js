@@ -1,20 +1,14 @@
 import React from "react";
-import clsx from "clsx";
-
-import { makeStyles } from "@material-ui/core/styles";
-import { Grid } from "@material-ui/core";
-import CircularProgress from "@material-ui/core/CircularProgress";
-
-const useStyles = makeStyles((theme) => ({
-    box: {
-        backgroundColor: "#fc754d",
-    },
-}));
 
 export default function Analogy({ apiStatus, client }) {
-    const classes = useStyles();
     const [waiting, setWaiting] = React.useState(false);
     const [result, setResult] = React.useState("");
+
+    const testError = {
+        error_type: "TestError",
+        message: "Test message",
+        stacktrace: "From ... \nmore code",
+    };
     const [error, setError] = React.useState("");
     const [inputPos1, setInputPos1] = React.useState("");
     const [inputNeg1, setInputNeg1] = React.useState("");
@@ -121,12 +115,12 @@ export default function Analogy({ apiStatus, client }) {
     let content;
     if (error) {
         content = (
-            <>
-                <p className="error">
+            <div className="mx-auto max-w-screen-md text-primary font-light">
+                <p>
                     {error.error_type}: {error.message}
                 </p>
-                <p className="error">{error.stacktrace}</p>
-            </>
+                <p>{error.stacktrace}</p>
+            </div>
         );
     } else if (result) {
         let rows = result.map((result, index) => (
@@ -136,8 +130,8 @@ export default function Analogy({ apiStatus, client }) {
             </tr>
         ));
 
-        table = (
-            <div className="response">
+        content = (
+            <div>
                 <table>
                     <thead>
                         <tr>
@@ -152,124 +146,126 @@ export default function Analogy({ apiStatus, client }) {
     }
 
     return (
-        <Grid container className={clsx("box")} spacing={2}>
-            <Grid
-                item
-                container
-                xs={12}
-                spacing={5}
-                direction="row"
-                justifyContent="center"
-            >
-                <Grid item>
-                    <h2>Word Analogies</h2>
-                </Grid>
-                {/* <Grid item>
-                    {waiting ? <CircularProgress color="inherit" /> : null}
-                </Grid> */}
-            </Grid>
-            <Grid item>
-                <p>Find the most similar words with an operation</p>
-            </Grid>
+        <div className="w-full h-full bg-orange-light">
+            <div className="p-4 grid gap-2 grid-flow-row justify-evenly">
+                <div>
+                    <h2 className="font-comic text-primary text-3xl text-center">
+                        Word Analogies
+                    </h2>
+                    <p className="text-center text-primary font-light">
+                        Find the most similar words with an operation
+                    </p>
+                </div>
 
-            <Grid item container xs={12} spacing={2} className="inputs">
-                <Grid container className="inputs" direction="row" spacing={2}>
-                    <Grid item xs={6}>
-                        <input
-                            type="text"
-                            name="input_pos1"
-                            placeholder="POSITIVE"
-                            value={inputPos1}
-                            onChange={handleChange}
-                        />
-                    </Grid>
-                    <Grid item xs={6}>
-                        <input
-                            type="text"
-                            name="input_neg1"
-                            placeholder="NEGATIVE"
-                            value={inputNeg1}
-                            onChange={handleChange}
-                        />
-                    </Grid>
-                    <Grid item xs={6}>
-                        <input
-                            type="text"
-                            name="input_pos2"
-                            placeholder="POSITIVE"
-                            value={inputPos2}
-                            onChange={handleChange}
-                        />
-                    </Grid>
-                    <Grid item xs={6}>
-                        <input
-                            type="text"
-                            name="input_neg2"
-                            placeholder="NEGATIVE"
-                            value={inputNeg2}
-                            onChange={handleChange}
-                        />
-                    </Grid>
-                    <Grid item xs={6}>
-                        <input
-                            type="text"
-                            name="input_pos3"
-                            placeholder="POSITIVE"
-                            value={inputPos3}
-                            onChange={handleChange}
-                        />
-                    </Grid>
-                    <Grid item xs={6}>
-                        <input
-                            type="text"
-                            name="input_neg3"
-                            placeholder="NEGATIVE"
-                            value={inputNeg3}
-                            onChange={handleChange}
-                        />
-                    </Grid>
-                </Grid>
-            </Grid>
+                <div className="grid gap-2 grid-cols-2 font-sans">
+                    <input
+                        type="text"
+                        name="input_pos1"
+                        placeholder="POSITIVE"
+                        value={inputPos1}
+                        onChange={handleChange}
+                        className="p-2"
+                    />
+                    <input
+                        type="text"
+                        name="input_neg1"
+                        placeholder="NEGATIVE"
+                        value={inputNeg1}
+                        onChange={handleChange}
+                        className="p-2"
+                    />
+                    <input
+                        type="text"
+                        name="input_pos2"
+                        placeholder="POSITIVE"
+                        value={inputPos2}
+                        onChange={handleChange}
+                        className="p-2"
+                    />
+                    <input
+                        type="text"
+                        name="input_neg2"
+                        placeholder="NEGATIVE"
+                        value={inputNeg2}
+                        onChange={handleChange}
+                        className="p-2"
+                    />
+                    <input
+                        type="text"
+                        name="input_pos3"
+                        placeholder="POSITIVE"
+                        value={inputPos3}
+                        onChange={handleChange}
+                        className="p-2"
+                    />
+                    <input
+                        type="text"
+                        name="input_neg3"
+                        placeholder="NEGATIVE"
+                        value={inputNeg3}
+                        onChange={handleChange}
+                        className="p-2"
+                    />
+                </div>
 
-            <Grid item xs={12}>
-                <button
-                    className="button"
-                    disabled={waiting || !ready}
-                    onClick={handleClick}
-                >
-                    {ready ? (waiting ? "waiting" : "query") : "loading"}
-                </button>
-            </Grid>
+                <div className="">
+                    <button
+                        disabled={waiting || !ready}
+                        onClick={handleClick}
+                        className="w-full h-10 border-2 border-primary text-primary font-comic tracking-widest hover:bg-primary hover:text-white"
+                    >
+                        {ready ? (waiting ? "waiting" : "query") : "loading"}
+                    </button>
+                </div>
 
-            <Grid item xs={12}>
-                {content}
-            </Grid>
+                <div className="mb-auto">{content}</div>
 
-            <Grid item xs={12}>
-                <p className="small">
-                    Examples:{" "}
-                    <a onClick={ex_queen} href="#">
-                        King - Man + Woman
-                    </a>
-                    ,{" "}
-                    <a onClick={ex_cold} href="#">
-                        Hot - Summer + Winter
-                    </a>
-                    ,{" "}
-                    <a onClick={ex_niece} href="#">
-                        Girl - Boy + Nephew
-                    </a>
-                    ,{" "}
-                    <a onClick={ex_madrid} href="#">
-                        France + Italy + Spain - Paris - Rome
-                    </a>
-                    ,{" "}
-                    <a onClick={ex_unicorn} href="#">
-                        Mythical creature + horse + magical
-                    </a>
-                    .
-                </p>
-            </Grid>
-        </Grid>
+                <div className="">
+                    <p className="small font-light text-primary text-sm">
+                        Examples:{" "}
+                        <a
+                            className="underline hover:text-white"
+                            onClick={ex_queen}
+                            href="#"
+                        >
+                            King - Man + Woman
+                        </a>
+                        ,{" "}
+                        <a
+                            className="underline hover:text-white"
+                            onClick={ex_cold}
+                            href="#"
+                        >
+                            Hot - Summer + Winter
+                        </a>
+                        ,{" "}
+                        <a
+                            className="underline hover:text-white"
+                            onClick={ex_niece}
+                            href="#"
+                        >
+                            Girl - Boy + Nephew
+                        </a>
+                        ,{" "}
+                        <a
+                            className="underline hover:text-white"
+                            onClick={ex_madrid}
+                            href="#"
+                        >
+                            France + Italy + Spain - Paris - Rome
+                        </a>
+                        ,{" "}
+                        <a
+                            className="underline hover:text-white"
+                            onClick={ex_unicorn}
+                            href="#"
+                        >
+                            Mythical creature + horse + magical
+                        </a>
+                        .
+                    </p>
+                </div>
+            </div>
+        </div>
     );
 }

@@ -23,7 +23,15 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
+      - name: Load cached node_modules
+        id: cached-node_modules-dependencies
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: node_modules-${{ runner.os }}-${{ hashFiles('**/package*.json') }}
+
       - name: Install JS deps
+        if: steps.cached-node_modules-dependencies.outputs.cache-hit != 'true'
         run: |
           make npm-install
 
