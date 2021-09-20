@@ -68,7 +68,7 @@ class Index extends React.Component {
         let content = "";
         if (error) {
             content = (
-                <div className="mx-auto max-w-screen-md text-primary font-light">
+                <div className="mx-auto max-w-screen-md text-primary font-mono">
                     <p>
                         {error.error_type ? error.error_type : "Error"}:{" "}
                         {error.message}
@@ -86,60 +86,56 @@ class Index extends React.Component {
         }
 
         return (
-            <>
-                <div className="mx-auto max-w-screen-lg flex flex-col h-screen justify-between">
-                    <header className="my-10">
-                        <h1 className="text-center text-white title text-7xl lg:text-title font-comic">
-                            WORD2VEC
-                        </h1>
-                        <h2 className="text-center text-gray-800 text-3xl subtitle font-comic">
-                            Word embedding functions
-                        </h2>
-                        <div className="text-center font-light text-xs text-gray-700">
-                            <p className="api-status">
-                                API Status: {statusText}
-                            </p>
-                            {apiStatus == "ready" || apiStatus == "error" ? (
-                                ""
-                            ) : (
-                                <svg
-                                    className="animate-spin h-5 w-5 mr-3 ..."
-                                    viewBox="0 0 24 24"
-                                ></svg>
-                            )}
-                        </div>
-                    </header>
+            <div className="mx-auto max-w-screen-lg flex flex-col h-screen justify-between">
+                <header className="my-10">
+                    <h1 className="text-center text-white title text-7xl lg:text-title font-comic">
+                        WORD2VEC
+                    </h1>
+                    <h2 className="text-center text-gray-800 text-3xl subtitle font-comic">
+                        Word embedding functions
+                    </h2>
+                    <div className="text-center font-light text-xs text-gray-700">
+                        <p className="api-status">API Status: {statusText}</p>
+                        {apiStatus == "ready" || apiStatus == "error" ? (
+                            ""
+                        ) : (
+                            <svg
+                                className="animate-spin h-5 w-5 mr-3 ..."
+                                viewBox="0 0 24 24"
+                            ></svg>
+                        )}
+                    </div>
+                </header>
 
-                    <main className="mb-auto">{content}</main>
+                <main className="mb-auto">{content}</main>
 
-                    <footer className="mx-auto my-4 py-5 font-light">
-                        <p className="text-primary text-sm">
-                            Built by{" "}
-                            <a
-                                className="underline hover:text-white"
-                                href="https://danielfrg.com/"
-                            >
-                                Daniel Rodriguez
-                            </a>
-                            .{" "}
-                            <a
-                                className="underline hover:text-white"
-                                href="https://github.com/danielfrg/word2vec-app"
-                            >
-                                Code on Github
-                            </a>
-                            .{" "}
-                            <a
-                                className="underline hover:text-white"
-                                href="https://danielfrg.com/blog/2018/09/word2vec-app-algorithmia/"
-                            >
-                                More info
-                            </a>
-                            .
-                        </p>
-                    </footer>
-                </div>
-            </>
+                <footer className="mx-auto my-4 py-5 font-light">
+                    <p className="text-primary text-sm">
+                        Built by{" "}
+                        <a
+                            className="underline hover:text-white"
+                            href="https://danielfrg.com/"
+                        >
+                            Daniel Rodriguez
+                        </a>
+                        .{" "}
+                        <a
+                            className="underline hover:text-white"
+                            href="https://github.com/danielfrg/word2vec-app"
+                        >
+                            Code on Github
+                        </a>
+                        .{" "}
+                        <a
+                            className="underline hover:text-white"
+                            href="https://danielfrg.com/blog/2018/09/word2vec-app-algorithmia/"
+                        >
+                            More info
+                        </a>
+                        .
+                    </p>
+                </footer>
+            </div>
         );
     }
 }
