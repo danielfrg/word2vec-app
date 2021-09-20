@@ -28,7 +28,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: node_modules
-          key: node_modules-${{ runner.os }}-${{ hashFiles('**/package*.json') }}
+          key: node_modules-${{ runner.os }}-${{ hashFiles('js/package*.json') }}
 
       - name: Install JS deps
         if: steps.cached-node_modules-dependencies.outputs.cache-hit != 'true'
@@ -37,7 +37,7 @@ jobs:
 
       - name: Build website
         run: |
-          make build
+          make npm-build
 
       - name: Push website (master)
         uses: jsmrcaga/action-netlify-deploy@master

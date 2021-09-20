@@ -9,7 +9,7 @@ MAKEFLAGS += --no-builtin-rules
 first: help
 
 
-build: npm-build  ## Build site
+all: npm-build  ## Build everything
 
 # ------------------------------------------------------------------------------
 # Build (JS)
