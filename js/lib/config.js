@@ -1,6 +1,6 @@
 const SiteConfig = {
     title: "word2vec - word embedding functions",
-    trackingID: "UA-35523657-5",
+    trackingID: "G-3673QMK9C4",
 };
 
 export default SiteConfig;
