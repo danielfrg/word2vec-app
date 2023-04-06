@@ -1,9 +1,8 @@
 class Algorithm {
     constructor() {
         // This is being loaded on the HTML head
-        const Algorithmia = window.Algorithmia;
-
-        this.client = Algorithmia.client("simNkidTbC0XeTmxJEdslAAVE3K1");
+        // const Algorithmia = window.Algorithmia;
+        // this.client = Algorithmia.client("simNkidTbC0XeTmxJEdslAAVE3K1");
     }
 
     ping() {

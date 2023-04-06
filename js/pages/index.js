@@ -1,8 +1,8 @@
 import React from "react";
 
-import Algorithm from "../lib/algorithm";
-import Distance from "../components/distance";
 import Analogy from "../components/analogy";
+import Distance from "../components/distance";
+import Algorithm from "../lib/algorithm";
 
 class Index extends React.Component {
     constructor(props) {
@@ -23,32 +23,32 @@ class Index extends React.Component {
     componentDidMount() {
         const client = new Algorithm();
 
-        this.setState({ client: client });
+        // this.setState({ client: client });
 
-        client.ping().then((response) => {
-            console.log("API Ping response:");
-            console.log(response);
+        // client.ping().then((response) => {
+        //     console.log("API Ping response:");
+        //     console.log(response);
 
-            if (response.error) {
-                this.setState({ apiStatus: "error", error: response.error });
-            } else {
-                this.setState({ apiStatus: "loading" });
+        //     if (response.error) {
+        //         this.setState({ apiStatus: "error", error: response.error });
+        //     } else {
+        //         this.setState({ apiStatus: "loading" });
 
-                client.load().then((response) => {
-                    console.log("API Load response:");
-                    console.log(response);
+        //         client.load().then((response) => {
+        //             console.log("API Load response:");
+        //             console.log(response);
 
-                    if (response.error) {
-                        this.setState({
-                            apiStatus: "error",
-                            error: response.error,
-                        });
-                    } else {
-                        this.setState({ apiStatus: "ready" });
-                    }
-                });
-            }
-        });
+        //             if (response.error) {
+        //                 this.setState({
+        //                     apiStatus: "error",
+        //                     error: response.error,
+        //                 });
+        //             } else {
+        //                 this.setState({ apiStatus: "ready" });
+        //             }
+        //         });
+        //     }
+        // });
     }
 
     render() {
